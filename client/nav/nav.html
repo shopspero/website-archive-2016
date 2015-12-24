@@ -1,0 +1,64 @@
+<template name="topNav">
+     <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+        	
+            <div class="navbar-header">
+
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                	<li><a href="/about#us">About Spero</a></li>
+                	<li><a href="/about#vision">The Vision</a></li>
+                	<li><a href="/about#team">The Team</a></li>
+
+                </ul>
+            </div>
+
+                <!--
+                <a class="navbar-brand" href="#">Navigation layout</a>
+                -->
+
+            </div>
+
+        </div>
+    </nav>
+</template>
+
+<template name="mainNav">
+     <nav class="navbar" role="navigation">
+        <div class="container">
+        	
+            <div class="navbar-header">
+
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <!--
+                <a class="navbar-brand" href="#">Navigation layout</a>
+                -->
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                	{{#each categories}}
+        				{{> category}}
+     				{{/each}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {{ > yield "cover" }}
+  
+    <div class="container">
+       {{> yield "content"}}
+    </div>
+    <hr/>
+   	<p>Copyright &copy; Spero INC, 2013-2015.</p>
+</template>
+
+<template name="category">
+  <li><a href={{categoryUrl}}>{{categoryName}}</a></li>
+</template>

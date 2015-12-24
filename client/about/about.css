@@ -1,0 +1,57 @@
+#meet-the-team-container{
+  width: 750px;
+  height: 550px;
+  display: display;
+}
+
+#meet-the-team-title a{
+  width: 750px;
+  font-size: 50;
+  font-style: normal;
+  font-family: 'OstrichSansRounded', sans-serif;
+}
+
+#meet-the-team-content{
+  width: 750px;
+  font-size: 40;
+
+  overflow-x: hidden;
+
+}
+
+div.member{
+  width: 750px;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+div.member img{
+  width: 250px;
+  height:250px;
+  float: left;
+}
+div.member-content{
+  float: right;
+  width: 445px;
+  overflow:hidden;
+  margin-left: 5px;
+}
+
+a.member-name{
+  font-size: 35;
+  font-style: normal;
+  font-family: 'bebas-neue';
+}
+
+a.member-role{
+  font-size: 18;
+  font-style: normal;
+  font-family: 'Grand Hotel', serif;
+}
+
+p.member-bio{
+  font-size: 15;
+  font-family: 'OstrichSansRounded', sans-serif;
+  margin-top: 0px;
+  font-style: normal;
+}

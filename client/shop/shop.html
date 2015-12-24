@@ -1,0 +1,40 @@
+<template name="newArrivals">
+	<p> These are new arrivals lolol.. </p>
+  	{{#each items}}
+  		{{> item}}
+	{{/each}}
+</template>
+
+<template name="women">
+  	<p> These are women lolol.. </p>
+   	{{#each items}}
+  		{{> item}}
+	{{/each}}
+</template>
+
+<template name="men">
+  	<p> These are men lolol.. </p>
+   	{{#each items}}
+  		{{> item}}
+	{{/each}}
+</template>
+
+<template name="accessories">
+  	<p> These are accessories lolol.. </p>
+   	{{#each items}}
+  		{{> item}}
+	{{/each}}
+</template>
+
+<template name="artwork">
+  <p> These are artwork </p>
+</template>
+
+<template name="all">
+  <p> These are all </p>
+</template>
+
+<template name="item">
+  <p> Name: {{ name }} </p>
+  <p> Price: {{ price }} </p>
+</template>
