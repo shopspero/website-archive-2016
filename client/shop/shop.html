@@ -1,9 +1,15 @@
 <template name="newArrivals">
-	<p> These are new arrivals lolol.. </p>
+  {{ name }}
+  {{ #with coverItem }}
+    
+    {{ > categoryCover }} <!-- load url from js the file -->
+  {{ /with }}
+	<p> These are new arrivals qlolol.. </p>
   	{{#each items}}
   		{{> item}}
 	{{/each}}
 </template>
+
 
 <template name="women">
   	<p> These are women lolol.. </p>
@@ -37,4 +43,8 @@
 <template name="item">
   <p> Name: {{ name }} </p>
   <p> Price: {{ price }} </p>
+</template>
+
+<template name="sale">
+  <p> These are artwork </p>
 </template>

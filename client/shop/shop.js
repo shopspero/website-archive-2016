@@ -4,9 +4,13 @@ Template.homeContent.helpers({
     return Session.get('counter');
   }
 });
+
+
 console.log('Number of items' + Items.find().count())
 Template.newArrivals.helpers({
 	/* fetch clothes less than 15 days old */
+	name: 'New Arrivals',
+	coverItem: Items.findOne({category: 'Women'}, { sort: { createdAt: -1 }, limit: 1 }),
 	items: Items.find({category: 'Women'},  { sort: { createdAt: -1 }, limit: 10 })
 })
 

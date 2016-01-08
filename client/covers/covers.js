@@ -6,6 +6,6 @@ Template.categoryCover.helpers({
 Template.categoryCover.onRendered(function () {
   console.log('template rendering...')
   console.log(Router.current().route._path)
-  $('div#categoryName').text(Router.current().route._path)
+  //$('div#categoryName').text(Router.current().route._path)
 })
 
