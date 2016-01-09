@@ -1,13 +1,19 @@
 <template name="newArrivals">
   {{ name }}
-  {{ #with coverItem }}
-    
-    {{ > categoryCover }} <!-- load url from js the file -->
-  {{ /with }}
-	<p> These are new arrivals qlolol.. </p>
-  	{{#each items}}
-  		{{> item}}
-	{{/each}}
+
+  {{#if Template.subscriptionsReady }}
+    {{ #with coverItem }}
+      
+      {{ > categoryCover }} <!-- load url from js the file -->
+    {{ /with }}
+  	<p> These are new arrivals qlolol.. </p>
+    	{{#each items}}
+    		{{> item}}
+  	{{/each}}
+  {{ else }}
+  Loading...
+  {{/if}}
+
 </template>
 
 

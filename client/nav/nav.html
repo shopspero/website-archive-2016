@@ -72,7 +72,7 @@
 <template name="category">
     <li class="dropdown">
         {{ #if subcategories.length }}
-            <a href={{categoryUrl}} data-toggle="dropdown" class="dropdown-toggle">{{name}} <b class="caret"></b></a>
+            <a href={{categoryUrl}} data-toggle="dropdown" class="dropdown-toggle disabled">{{name}} <b class="caret"></b></a>
             <ul class="dropdown-menu" id="menu1">
 
                 {{ #each subcategories }}
