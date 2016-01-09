@@ -6,14 +6,14 @@ Template.homeContent.helpers({
 });
 
 Template.shopContent.onCreated(function() {
-
 	this.category = Template.currentData().category
 	this.subcategory = Template.currentData().subcategoryName
-	console.log(this.subcategory)
-	//this.subscribe('allItems')
-	this.subscribe('items', this.category, this.subcategory)
+
+	this.subscribe('allItems')
+	//this.subscribe('items', this.category, this.subcategory)
 
 })
+
 
 
 Template.shopContent.helpers({
@@ -24,9 +24,12 @@ Template.shopContent.helpers({
 		return Template.currentData().subcategoryName
 	},
 	yo: function() {
-		console.log('lol')
-		console.log(Items.find({category: 'Women'}, { sort: { createdAt: -1 }}).count())
-		return Items.find({category: this.category.name, "subcategory.name": this.subcategory }).count() // returns wrong amount.. for sub category TODO
+
+		if (Template.currentData().subcategoryName) {
+			return Items.find({category: Template.currentData().category.name, subcategories: Template.currentData().subcategoryName }).count()
+		} else {
+			return Items.find({category: Template.currentData().category.name }).count()
+		}
 	}
 
 })
