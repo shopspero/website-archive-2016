@@ -1,5 +1,9 @@
 
+Template.mainNav.onCreated(function() {
+	this.subscribe('categories')
+})
+
 
 Template.mainNav.helpers({
-  categories: clientCategories
+  categories: Categories.find({})
 });

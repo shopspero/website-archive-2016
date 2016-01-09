@@ -16,9 +16,18 @@
 
 </template>
 
+<template name="shopContent">
+  {{ namae}}
+  {{ subcategoryNamed }}
+  {{#if Template.subscriptionsReady }}
+    {{ yo }}
+  {{ else }}
+  Loading...?????
+  {{/if}}
+</template>
 
 <template name="women">
-  	<p> These are women lolol.. </p>
+  	<p> These are women {{ subcategory }} lolol.. </p>
    	{{#each items}}
   		{{> item}}
 	{{/each}}

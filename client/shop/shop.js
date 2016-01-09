@@ -5,6 +5,33 @@ Template.homeContent.helpers({
   }
 });
 
+Template.shopContent.onCreated(function() {
+
+	this.category = Template.currentData().category
+	this.subcategory = Template.currentData().subcategoryName
+	console.log(this.subcategory)
+	//this.subscribe('allItems')
+	this.subscribe('items', this.category, this.subcategory)
+
+})
+
+
+Template.shopContent.helpers({
+	namae: function() {
+		return Template.currentData().category.name
+	},
+	subcategoryNamed: function() {
+		return Template.currentData().subcategoryName
+	},
+	yo: function() {
+		console.log('lol')
+		console.log(Items.find({category: 'Women'}, { sort: { createdAt: -1 }}).count())
+		return Items.find({category: this.category.name, "subcategory.name": this.subcategory }).count() // returns wrong amount.. for sub category TODO
+	}
+
+})
+
+
 Template.newArrivals.onCreated(function() {
 	//this.subscribe('items', 'Women', null, 1);
 	this.subscribe('items', 'Women', null);
@@ -29,9 +56,15 @@ Template.women.onCreated(function() {
 	this.subscribe('items', 'Women', null, 0);
 })
 Template.women.helpers({
-	/* fetch clothes less than 15 days old */
-
+	subcategory: function() {
+		var router = Router.current();
+		return router && router.params.query.subcategory
+	},
 	items: Items.find({ category: 'Women'})
+})
+
+Template.women.onRendered(function() {
+	this.subcategory = Router.current().params
 })
 
 Template.men.onCreated(function() {

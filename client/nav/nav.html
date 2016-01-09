@@ -49,10 +49,11 @@
                 </ul>
             -->
                 <ul class="nav nav-pills">
-
-                    {{#each categories}}
-                        {{> category}}
-                    {{/each}}
+                    {{#if Template.subscriptionsReady }}
+                        {{#each categories}}
+                            {{> category}}
+                        {{/each}}
+                    {{/if}}
 
                 </ul>
 
@@ -87,5 +88,5 @@
 </template>
 
 <template name="subcategory">
-    <li><a href="#" >{{this}}</a></li>
+    <li><a href="{{../categoryUrl}}?subcategory={{query}}" >{{name}}</a></li>
 </template>
