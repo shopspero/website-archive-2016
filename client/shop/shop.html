@@ -1,29 +1,15 @@
-<template name="newArrivals">
-  {{ name }}
-
+<template name="shopContent">
+  {{ name }} {{ subcategoryName }}
   {{#if Template.subscriptionsReady }}
     {{ #with coverItem }}
       
       {{ > categoryCover }} <!-- load url from js the file -->
     {{ /with }}
-  	<p> These are new arrivals qlolol.. </p>
-    	{{#each items}}
-    		{{> item}}
-  	{{/each}}
+    {{#each items}}
+      {{> item}}
+    {{/each}}
   {{ else }}
   Loading...
-  {{/if}}
-
-</template>
-
-<template name="shopContent">
-  {{ subscribe }}
-  {{ namae}}
-  {{ subcategoryNamed }}
-  {{#if Template.subscriptionsReady }}
-    {{ yo }}
-  {{ else }}
-  Loading...?????
   {{/if}}
 </template>
 

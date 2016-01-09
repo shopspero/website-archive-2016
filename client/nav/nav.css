@@ -4,13 +4,15 @@
   vertical-align: top;
 }
 
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:7px !important; 
+    padding-bottom:0 !important;
+    height: 35px;
+}
+.navbar {min-height:35px !important;}
+
 .navbar .navbar-collapse {
   text-align: center;
-}
-
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
 }
 
 .sidebar-nav {
