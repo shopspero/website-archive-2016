@@ -1,3 +1,55 @@
 <template name="inventoryContent">
-  inventory...
+	<h1> Add/Edit Inventory </h1>
+	<hr/>
+		<h3>Add Inventory</h3>
+		{{ > addInventory }}
+
+	<hr/>
+
 </template>
+
+<template name="addInventory">
+
+	<form class="new-inventory">
+		Name: <input type="text" name="name" placeholder="" /><br>
+		Price: $ <input type="number" step="any" name="price" placeholder="" /><br>
+		Category: <select id="category-select" name="category">
+			{{ #each categories }}
+				{{ > categoryDropdown }}
+			{{ /each }}
+		</select>
+		{{ #if subcategories }}
+			Subcategory: <select id="subcategory-select" name="subcategory">
+				{{ #each subcategories }}
+					{{ > subcategoryDropdown }}
+				{{ /each }}
+			</select>
+		{{ /if }}
+
+		{{ > subcategoryDropdown }}
+		<input type="submit" value="Submit">
+	</form>
+</template>
+
+<template name="categoryDropdown">
+	<option value={{_id}}>{{ name }}</option>
+</template>
+
+<template name="subcategoryDropdown">
+	<option value={{query}}>{{ name }}</option>
+</template>
+<!--
+Items.insert({
+			name: "Hood " + i,
+			price: 40.00,
+			category: ['Women', 'Men'],
+			subcategories: ['sale', 'sweaters'],
+			photos: ['https://farm1.staticflickr.com/709/22187892342_c90a6fef31_b.jpg'],
+			sizes: {
+				'S': 30,
+				'M': 40,
+				'L': 20
+			},
+			createdAt: new Date()
+		});
+		-->
