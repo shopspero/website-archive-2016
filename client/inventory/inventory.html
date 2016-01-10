@@ -10,7 +10,7 @@
 
 <template name="addInventory">
 
-	<form class="new-inventory">
+	<form class="new-inventory1">
 		Name: <input type="text" name="name" placeholder="" /><br>
 		Price: $ <input type="number" step="any" name="price" placeholder="" /><br>
 		Category: <select id="category-select" name="category">
@@ -18,25 +18,73 @@
 				{{ > categoryDropdown }}
 			{{ /each }}
 		</select>
-		{{ #if subcategories }}
+		{{ #if selectedCategory.subcategories }}
+
+			<!--
 			Subcategory: <select id="subcategory-select" name="subcategory">
 				{{ #each subcategories }}
 					{{ > subcategoryDropdown }}
 				{{ /each }}
 			</select>
+			-->
+			{{ #each selectedCategory.subcategories }}
+				{{ > subcategoryCheckbox  }}
+			{{ /each }}
+
 		{{ /if }}
 
-		{{ > subcategoryDropdown }}
 		<input type="submit" value="Submit">
 	</form>
+
+	<hr>
+
+	<form class="new-inventory">
+		<div class="form-group">
+			<label for="exampleInputEmail1"></label>
+			<input type="name" class="form-control" name="name" placeholder="Name of Product">
+		</div>
+
+		<div class="form-group">
+			<div class="input-group">
+			 	<div class="input-group-addon">$</div>
+			 	<input type="text" class="form-control" name="price" placeholder="Amount">
+			</div>
+		</div>
+
+		<select multiple class="form-control">			
+			{{ #each categories }}
+				{{ > categoryDropdown }}
+			{{ /each }}
+		</select>
+
+
+	<div class="form-group">
+		<label for="exampleInputFile">File input</label>
+		<input type="file" id="exampleInputFile">
+		<p class="help-block">Example block-level help text here.</p>
+	</div>
+
+	<div class="checkbox">
+		<label>
+	  		<input type="checkbox"> Check me out
+		</label>
+	</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+
+
+
+
 </template>
 
 <template name="categoryDropdown">
 	<option value={{_id}}>{{ name }}</option>
 </template>
 
-<template name="subcategoryDropdown">
-	<option value={{query}}>{{ name }}</option>
+<template name="subcategoryCheckbox">
+
+
+	<label class="checkbox-inline"><input type="checkbox" value={{ query }}>{{ name }} </label>
 </template>
 <!--
 Items.insert({

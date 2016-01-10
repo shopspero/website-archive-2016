@@ -4,8 +4,8 @@ Template.addInventory.onCreated(function() {
 
 Template.addInventory.helpers({
 	categories: Categories.find({}),
-	subcategories: function() {
-		return Session.get('subcategories') || []
+	selectedCategory: function() {
+		return Session.get('selectedCategory')
 	}
 })
 Template.addInventory.events({
@@ -35,7 +35,7 @@ Template.addInventory.events({
 	},
 	"change #category-select": function(event){
         var categoryId = event.target.value
-        Session.set('subcategories', Categories.findOne(categoryId).subcategories)
+        Session.set('selectedCategory', Categories.findOne(categoryId))
         if (Categories.findOne(categoryId).subcategories.length > 0) {
         	console.log('yasss')
         } else {
