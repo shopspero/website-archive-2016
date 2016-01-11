@@ -1,11 +1,18 @@
 Template.addInventory.onCreated(function() {
 	this.subscribe("categories")
+	this.subscribe("inventoryCategories")
 })
 
 Template.addInventory.helpers({
-	categories: Categories.find({}),
+	categories: InventoryCategories.find({}),
 	selectedCategory: function() {
-		return Session.get('selectedCategory')
+		return Session.get('selectedCategory') || InventoryCategories.findOne({ name: "Clothes"})
+	},
+	selectedMen: function() {
+		return Session.get('selectedMen') || false
+	},
+	selectedWomen: function() {
+		return Session.get('selectedWomen') || false
 	}
 })
 Template.addInventory.events({
@@ -35,12 +42,28 @@ Template.addInventory.events({
 	},
 	"change #category-select": function(event){
         var categoryId = event.target.value
-        Session.set('selectedCategory', Categories.findOne(categoryId))
-        if (Categories.findOne(categoryId).subcategories.length > 0) {
+        Session.set('selectedCategory', InventoryCategories.findOne(categoryId))
+        if (InventoryCategories.findOne(categoryId).options) {
         	console.log('yasss')
         } else {
         	console.log('noo')
         }
         
+     },
+
+     "change #sexMen": function(event){
+     	Session.set('selectedMen', event.target.checked)
+     	console.log('status.. women, men')
+     	console.log(Session.get('selectedWomen'))
+     	console.log(Session.get('selectedMen'))
      }
+     ,
+     "change #sexWomen": function(event) {
+     	Session.set('selectedWomen', event.target.checked)
+     	console.log('status.. women, men')
+     	console.log(Session.get('selectedWomen'))
+     	console.log(Session.get('selectedMen'))
+     }
+     
+
 });

@@ -18,8 +18,12 @@
 				{{ > categoryDropdown }}
 			{{ /each }}
 		</select>
-		{{ #if selectedCategory.subcategories }}
+		{{ #if selectedCategory.options }}
 
+
+			{{ #each selectedCategory.options }}
+				{{ > sexCheckbox }}
+			{{ /each}}
 			<!--
 			Subcategory: <select id="subcategory-select" name="subcategory">
 				{{ #each subcategories }}
@@ -27,7 +31,7 @@
 				{{ /each }}
 			</select>
 			-->
-			{{ #each selectedCategory.subcategories }}
+			{{ #each selectedCategory.options }}
 				{{ > subcategoryCheckbox  }}
 			{{ /each }}
 
@@ -51,11 +55,29 @@
 			</div>
 		</div>
 
-		<select multiple class="form-control">			
+		<select class="form-control" id="category-select">			
 			{{ #each categories }}
 				{{ > categoryDropdown }}
 			{{ /each }}
 		</select>
+
+		{{ #if selectedCategory.options }}
+
+			{{ #each selectedCategory.options }}
+				{{ > sexCheckbox }}
+			{{ /each}}
+			<!--
+			Subcategory: <select id="subcategory-select" name="subcategory">
+				{{ #each subcategories }}
+					{{ > subcategoryDropdown }}
+				{{ /each }}
+			</select>
+			-->
+			{{ #each selectedCategory.options }}
+				{{ > subcategoryCheckbox  }}
+			{{ /each }}
+
+		{{ /if }}
 
 
 	<div class="form-group">
@@ -84,7 +106,13 @@
 <template name="subcategoryCheckbox">
 
 
-	<label class="checkbox-inline"><input type="checkbox" value={{ query }}>{{ name }} </label>
+	<label class="checkbox-inline"><input type="checkbox" value={{ name }}>{{ name }} </label>
+</template>
+
+<template name="sexCheckbox">
+	<label class="checkbox-inline">
+  		<input type="checkbox" id="sex{{ sex }}" value={{ sex }}> {{ sex }}
+	</label>
 </template>
 <!--
 Items.insert({
