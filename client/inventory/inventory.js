@@ -13,6 +13,16 @@ Template.addInventory.helpers({
 	},
 	selectedWomen: function() {
 		return Session.get('selectedWomen') || false
+	},
+	subcategories: function() {
+		if (Session.get('selectedMen')) {
+			return InventoryCategories.findOne({name: "Clothes"}).options[1].subcategories
+		} else if (Session.get('selectedWomen')) {
+			return InventoryCategories.findOne({name: "Clothes"}).options[0].subcategories 
+		} else {
+			return []
+		}
+
 	}
 })
 Template.addInventory.events({
@@ -22,7 +32,7 @@ Template.addInventory.events({
 
 		// Get value from form element
 		var text = event.target.name.value;
-		console.log(text)
+		console.log(event.target)
 
 		var regex  = /^\d+(?:\.\d{0,2})$/;
 		if (regex.test(event.target.price.value)) {
@@ -36,7 +46,7 @@ Template.addInventory.events({
 			text: text,
 			createdAt: new Date() // current time
 		}); */
-
+		console.log(event.target.saleRadio.value)
 		// Clear form
 		event.target.name.value = "done";
 	},

@@ -2,6 +2,7 @@
 	<h1> Add/Edit Inventory </h1>
 	<hr/>
 		<h3>Add Inventory</h3>
+		<br>
 		{{ > addInventory }}
 
 	<hr/>
@@ -9,63 +10,41 @@
 </template>
 
 <template name="addInventory">
-
-	<form class="new-inventory1">
-		Name: <input type="text" name="name" placeholder="" /><br>
-		Price: $ <input type="number" step="any" name="price" placeholder="" /><br>
-		Category: <select id="category-select" name="category">
-			{{ #each categories }}
-				{{ > categoryDropdown }}
-			{{ /each }}
-		</select>
-		{{ #if selectedCategory.options }}
-
-
-			{{ #each selectedCategory.options }}
-				{{ > sexCheckbox }}
-			{{ /each}}
-			<!--
-			Subcategory: <select id="subcategory-select" name="subcategory">
-				{{ #each subcategories }}
-					{{ > subcategoryDropdown }}
-				{{ /each }}
-			</select>
-			-->
-			{{ #each selectedCategory.options }}
-				{{ > subcategoryCheckbox  }}
-			{{ /each }}
-
-		{{ /if }}
-
-		<input type="submit" value="Submit">
-	</form>
-
-	<hr>
-
 	<form class="new-inventory">
 		<div class="form-group">
-			<label for="exampleInputEmail1"></label>
-			<input type="name" class="form-control" name="name" placeholder="Name of Product">
+			<label for="name">Name</label>
+			<input type="name" class="form-control" name="name" placeholder="Name of Item">
 		</div>
 
 		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea class="form-control" rows="3" placeholder="Description of Item"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="amount">Price</label>
 			<div class="input-group">
 			 	<div class="input-group-addon">$</div>
-			 	<input type="text" class="form-control" name="price" placeholder="Amount">
+			 	<input type="text" class="form-control" name="price" placeholder="Price of Item">
 			</div>
 		</div>
 
-		<select class="form-control" id="category-select">			
-			{{ #each categories }}
-				{{ > categoryDropdown }}
-			{{ /each }}
-		</select>
+		<div class="form-group">
+			<label for="category-select">Category&nbsp;</label>
+			<select class="form-control" id="category-select">			
+				{{ #each categories }}
+					{{ > categoryDropdown }}
+				{{ /each }}
+			</select>
+		</div>
 
 		{{ #if selectedCategory.options }}
-
-			{{ #each selectedCategory.options }}
-				{{ > sexCheckbox }}
-			{{ /each}}
+			<div class="form-group">
+				<label for="sexCheckbox">Sex:&nbsp;</label>
+				{{ #each selectedCategory.options }}
+					{{ > sexCheckbox }}
+				{{ /each}}
+			</div>
 			<!--
 			Subcategory: <select id="subcategory-select" name="subcategory">
 				{{ #each subcategories }}
@@ -73,25 +52,37 @@
 				{{ /each }}
 			</select>
 			-->
-			{{ #each selectedCategory.options }}
-				{{ > subcategoryCheckbox  }}
-			{{ /each }}
+			{{ #if subcategories }}
+				<div class="form-group">
+					<label for="subcategoryCheckbox">Subcategories:&nbsp;</label>
+					{{ #each subcategories }}
+						{{ > subcategoryCheckbox  }}
+					{{ /each }}
+				</div>
+			{{/if}}
+			
 
 		{{ /if }}
+		<div class="form-group">
+			<label for="radio-linline">Sale:&nbsp;</label>
+			<label class="radio-inline">
+	  			<input type="radio" name="saleRadio" id="inlineRadio1" value="sale"> On Sale
+			</label>
+			<label class="radio-inline">
+	 	 		<input type="radio" name="saleRadio" id="inlineRadio2" value="nosale"> Not On Sale
+			</label>
+		</div>
 
 
-	<div class="form-group">
-		<label for="exampleInputFile">File input</label>
-		<input type="file" id="exampleInputFile">
-		<p class="help-block">Example block-level help text here.</p>
-	</div>
 
-	<div class="checkbox">
-		<label>
-	  		<input type="checkbox"> Check me out
-		</label>
-	</div>
-		<button type="submit" class="btn btn-default">Submit</button>
+		<div class="form-group">
+			<label for="exampleInputFile">Photos</label>
+			<input type="file" id="exampleInputFile">
+			<p class="help-block">Example block-level help text here.</p>
+		</div>
+
+
+		<button type="submit" class="btn btn-default">Add Item to Inventory</button>
 	</form>
 
 
