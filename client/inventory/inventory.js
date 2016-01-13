@@ -30,9 +30,11 @@ Template.addInventory.events({
 		// Prevent default browser form submit
 		event.preventDefault();
 
+		var newInventory = {}
+
 		// Get value from form element
 		var text = event.target.name.value;
-		console.log(event.target)
+
 
 		var regex  = /^\d+(?:\.\d{0,2})$/;
 		if (regex.test(event.target.price.value)) {
@@ -47,8 +49,27 @@ Template.addInventory.events({
 			createdAt: new Date() // current time
 		}); */
 		console.log(event.target.saleRadio.value)
+
+
+		// set sale
+		if (event.target.saleRadio.value == 'sale') {
+			newInventory.sale = true;
+		} else if (event.target.saleRadio.value == 'nosale') {
+			newInventory.sale = false
+		}
+
+		// set preorder
+		if (event.target.preorderRadio.value == 'preorder') {
+			newInventory.preorder = true;
+		} else if (event.target.preorderRadio.value == 'nopreorder') {
+			newInventory.preorder = false
+		}
+			
+
+
 		// Clear form
 		event.target.name.value = "done";
+		
 	},
 	"change #category-select": function(event){
         var categoryId = event.target.value

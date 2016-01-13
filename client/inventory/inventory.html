@@ -39,8 +39,8 @@
 		</div>
 
 		{{ #if selectedCategory.options }}
+			<label for="sexCheckbox">Sex</label>
 			<div class="form-group">
-				<label for="sexCheckbox">Sex:&nbsp;</label>
 				{{ #each selectedCategory.options }}
 					{{ > sexCheckbox }}
 				{{ /each}}
@@ -53,8 +53,9 @@
 			</select>
 			-->
 			{{ #if subcategories }}
+				<label for="subcategoryCheckbox">Subcategories&nbsp;</label>
 				<div class="form-group">
-					<label for="subcategoryCheckbox">Subcategories:&nbsp;</label>
+					
 					{{ #each subcategories }}
 						{{ > subcategoryCheckbox  }}
 					{{ /each }}
@@ -63,8 +64,8 @@
 			
 
 		{{ /if }}
+		<label for="radio-inline">Sale&nbsp;</label>
 		<div class="form-group">
-			<label for="radio-linline">Sale:&nbsp;</label>
 			<label class="radio-inline">
 	  			<input type="radio" name="saleRadio" id="inlineRadio1" value="sale"> On Sale
 			</label>
@@ -73,6 +74,15 @@
 			</label>
 		</div>
 
+		<label for="radio-inline">Preorder&nbsp;</label>
+		<div class="form-group">
+			<label class="radio-inline">
+	  			<input type="radio" name="preorderRadio" id="inlineRadio3" value="preorder"> Preorder
+			</label>
+			<label class="radio-inline">
+	 	 		<input type="radio" name="preorderRadio" id="inlineRadio4" value="nopreorder"> No Preorder
+			</label>
+		</div>
 
 
 		<div class="form-group">
