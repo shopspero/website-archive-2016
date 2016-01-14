@@ -11,84 +11,106 @@
 
 <template name="addInventory">
 	<form class="new-inventory">
-		<div class="form-group">
-			<label for="name">Name</label>
-			<input type="name" class="form-control" name="name" placeholder="Name of Item">
-		</div>
-
-		<div class="form-group">
-			<label for="description">Description</label>
-			<textarea class="form-control" rows="3" placeholder="Description of Item"></textarea>
-		</div>
-
-		<div class="form-group">
-			<label for="amount">Price</label>
-			<div class="input-group">
-			 	<div class="input-group-addon">$</div>
-			 	<input type="text" class="form-control" name="price" placeholder="Price of Item">
+		<div class="form-group row">
+		
+			<div class="col-xs-5">
+				<label for="name">Name</label>
+				<input type="name" class="form-control" name="name" placeholder="Name of Item">
 			</div>
 		</div>
 
-		<div class="form-group">
-			<label for="category-select">Category&nbsp;</label>
-			<select class="form-control" id="category-select">			
-				{{ #each categories }}
-					{{ > categoryDropdown }}
-				{{ /each }}
-			</select>
+		<div class="form-group row">
+			<div class="col-sm-8">
+				<label for="description">Description</label>
+				<textarea class="form-control" rows="3" name="description" placeholder="Description of Item"></textarea>
+			</div>
 		</div>
 
-		{{ #if selectedCategory.options }}
-			<label for="sexCheckbox">Sex</label>
-			<div class="form-group">
-				{{ #each selectedCategory.options }}
-					{{ > sexCheckbox }}
-				{{ /each}}
-			</div>
-			<!--
-			Subcategory: <select id="subcategory-select" name="subcategory">
-				{{ #each subcategories }}
-					{{ > subcategoryDropdown }}
-				{{ /each }}
-			</select>
-			-->
-			{{ #if subcategories }}
-				<label for="subcategoryCheckbox">Subcategories&nbsp;</label>
-				<div class="form-group">
-					
-					{{ #each subcategories }}
-						{{ > subcategoryCheckbox  }}
-					{{ /each }}
+		<div class="form-group row">
+			<div class="col-sm-3">
+				<label for="amount">Price</label>
+				<div class="input-group">
+				 	<div class="input-group-addon">$</div>
+				 	<input type="text" class="form-control" name="price" placeholder="Price of Item">
 				</div>
-			{{/if}}
-			
+			</div>
 
+			<div class="col-sm-3">
+				<label for="category-select">Category</label>
+				<select class="form-control" id="category-select" name="category">			
+					{{ #each categories }}
+						{{ > categoryDropdown }}
+					{{ /each }}
+				</select>
+			</div>
+
+			{{ #if selectedCategory.options }}
+				<div class="col-sm-4">
+					<label for="sexCheckbox">Sex</label>
+					<div class="checkbox" >
+						{{ #each selectedCategory.options }}
+							{{ > sexCheckbox }}
+						{{ /each}}
+					</div>
+				</div>
+
+			{{ /if }}
+		</div>
+
+		{{ #if subcategories }}
+			<label for="subcategoryCheckbox">Subcategories&nbsp;</label>
+			<div class="form-group row">
+				{{ #each subcategories }}
+					{{ > subcategoryCheckbox  }}
+				{{ /each }}
+			</div>
+		{{/if}}
+
+		<label for="sizes">In Stock </label>
+
+		{{ #if subcategories }}
+			<p class="help-block"> From left to right: XS, S, M, L, XL. Leave blank if 0.</p>
+			<div class="form-group row">
+				{{ #each sizes }}
+					{{ > stockInput }}
+				{{ /each }}
+			</div>
+		{{ else }}
+			<div class="form-group row">
+
+				<div class="col-sm-2">
+					<input type="number" class="form-control" name="general">
+				</div>
+			</div>
 		{{ /if }}
-		<label for="radio-inline">Sale&nbsp;</label>
-		<div class="form-group">
-			<label class="radio-inline">
-	  			<input type="radio" name="saleRadio" id="inlineRadio1" value="sale"> On Sale
-			</label>
-			<label class="radio-inline">
-	 	 		<input type="radio" name="saleRadio" id="inlineRadio2" value="nosale"> Not On Sale
-			</label>
-		</div>
 
-		<label for="radio-inline">Preorder&nbsp;</label>
-		<div class="form-group">
-			<label class="radio-inline">
-	  			<input type="radio" name="preorderRadio" id="inlineRadio3" value="preorder"> Preorder
-			</label>
-			<label class="radio-inline">
-	 	 		<input type="radio" name="preorderRadio" id="inlineRadio4" value="nopreorder"> No Preorder
-			</label>
-		</div>
+		<label for="additionalLabels">Additional Labels</label>
+		<div class="form-group row">
 
+			<div class="col-sm-2">
+				<label class="checkbox-inline">
+						<input type="checkbox" name="sale"> On Sale
+				</label>
+			</div>
+			<div class="col-sm-2">
+				<label class="checkbox-inline">
+						<input type="checkbox" name="preorder"> Preorder
+				</label>
+	
+			</div>
+		</div>
 
 		<div class="form-group">
 			<label for="exampleInputFile">Photos</label>
 			<input type="file" id="exampleInputFile">
 			<p class="help-block">Example block-level help text here.</p>
+		</div>
+
+		<div class="form-group row">
+			<div class="col-sm-8">
+				<label for="shippingNotes">Shipping Notes</label>
+				<textarea class="form-control" rows="2" value="Flat Rate $5"></textarea>
+			</div>
 		</div>
 
 
@@ -101,19 +123,25 @@
 </template>
 
 <template name="categoryDropdown">
-	<option value={{_id}}>{{ name }}</option>
+	<option value={{name}}>{{ name }}</option>
 </template>
 
 <template name="subcategoryCheckbox">
-
-
-	<label class="checkbox-inline"><input type="checkbox" value={{ name }}>{{ name }} </label>
+	<div class="col-sm-2">
+		<label class="checkbox-inline"><input type="checkbox" name={{ name }}>{{ name }} </label>
+	</div>
 </template>
 
 <template name="sexCheckbox">
 	<label class="checkbox-inline">
   		<input type="checkbox" id="sex{{ sex }}" value={{ sex }}> {{ sex }}
 	</label>
+</template>
+
+<template name="stockInput">
+	<div class="col-sm-2">
+		<input type="number" class="form-control" name={{this}} placeholder={{this}}>
+	</div>
 </template>
 <!--
 Items.insert({

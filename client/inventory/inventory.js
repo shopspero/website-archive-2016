@@ -22,59 +22,80 @@ Template.addInventory.helpers({
 		} else {
 			return []
 		}
-
-	}
+	},
+	sizes: function() {
+		return ['XS', 'S', 'M', 'L', 'XL']
+	} 
 })
 Template.addInventory.events({
-	"submit .new-inventory": function (event) {
+	"submit .new-inventory": function (event, template) {
 		// Prevent default browser form submit
 		event.preventDefault();
 
 		var newInventory = {}
 
 		// Get value from form element
-		var text = event.target.name.value;
+		newInventory.name = event.target.name.value;
+
+		newInventory.name = event.target.description.value;
 
 
 		var regex  = /^\d+(?:\.\d{0,2})$/;
 		if (regex.test(event.target.price.value)) {
+			newInventory.price = parseFloat(event.target.price.value)
 			alert('good')
 		} else {
 			alert('bad')
 		}
-		// Insert a task into the collection
-		/*
-		Tasks.insert({
-			text: text,
-			createdAt: new Date() // current time
-		}); */
-		console.log(event.target.saleRadio.value)
 
+		newInventory.category = event.target.category.value
 
-		// set sale
-		if (event.target.saleRadio.value == 'sale') {
-			newInventory.sale = true;
-		} else if (event.target.saleRadio.value == 'nosale') {
-			newInventory.sale = false
+		newInventory.sex = []
+		if (Session.get('selectedMen')) {
+			newInventory.sex.push('Men');
+		}
+		if (Session.get('selectedWomen')) {
+			newInventory.sex.push('Women');
 		}
 
-		// set preorder
-		if (event.target.preorderRadio.value == 'preorder') {
-			newInventory.preorder = true;
-		} else if (event.target.preorderRadio.value == 'nopreorder') {
-			newInventory.preorder = false
-		}
-			
+		// additional options
+		newInventory.sale = event.target.sale.checked
+		newInventory.preorder = event.target.preorder.checked
 
+		InventoryCategories.findOne({name: "Clothes"}).options[0].subcategories.forEach(function(subcategory, index){
+			newInventory[subcategory.name] = (event.target[subcategory.name] && event.target[subcategory.name].checked) || false
+		});
+
+		var sizes = template.view.template.__helpers.get('sizes').call()
+		newInventory.sizes = {}
+		sizes.forEach(function(size, index) {
+			newInventory.sizes[size] = (event.target[size] && parseInt(event.target[size].value)) || 0
+		})
+		newInventory.sizes['general'] = (event.target.general && parseInt(event.target.general.value)) || 0
+
+
+		console.log(newInventory)
 
 		// Clear form
 		event.target.name.value = "done";
+
+		newInventory.photos = []
+
+
+		newInventory.createdAt = new Date();
+
+
+
+
+		// Insert item into the collection
+		/*
+		Items.insert(newInventory); */
 		
 	},
 	"change #category-select": function(event){
-        var categoryId = event.target.value
-        Session.set('selectedCategory', InventoryCategories.findOne(categoryId))
-        if (InventoryCategories.findOne(categoryId).options) {
+        var categoryName = event.target.value
+        Session.set('selectedCategory', InventoryCategories.findOne({name: categoryName}))
+        if (InventoryCategories.findOne({name: categoryName}).options) {
         	console.log('yasss')
         } else {
         	console.log('noo')
