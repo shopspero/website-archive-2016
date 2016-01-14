@@ -10,113 +10,117 @@
 </template>
 
 <template name="addInventory">
-	<form class="new-inventory">
-		<div class="form-group row">
-		
-			<div class="col-xs-5">
-				<label for="name">Name</label>
-				<input type="name" class="form-control" name="name" placeholder="Name of Item">
-			</div>
-		</div>
+	{{#if Template.subscriptionsReady }}
 
-		<div class="form-group row">
-			<div class="col-sm-8">
-				<label for="description">Description</label>
-				<textarea class="form-control" rows="3" name="description" placeholder="Description of Item"></textarea>
-			</div>
-		</div>
-
-		<div class="form-group row">
-			<div class="col-sm-3">
-				<label for="amount">Price</label>
-				<div class="input-group">
-				 	<div class="input-group-addon">$</div>
-				 	<input type="text" class="form-control" name="price" placeholder="Price of Item">
+		<form class="new-inventory">
+			<div class="form-group row">
+			
+				<div class="col-xs-5">
+					<label for="name">Name</label>
+					<input type="name" class="form-control" name="name" placeholder="Name of Item">
 				</div>
 			</div>
 
-			<div class="col-sm-3">
-				<label for="category-select">Category</label>
-				<select class="form-control" id="category-select" name="category">			
-					{{ #each categories }}
-						{{ > categoryDropdown }}
-					{{ /each }}
-				</select>
+			<div class="form-group row">
+				<div class="col-sm-8">
+					<label for="description">Description</label>
+					<textarea class="form-control" rows="3" name="description" placeholder="Description of Item"></textarea>
+				</div>
 			</div>
 
-			{{ #if selectedCategory.options }}
-				<div class="col-sm-4">
-					<label for="sexCheckbox">Sex</label>
-					<div class="checkbox" >
-						{{ #each selectedCategory.options }}
-							{{ > sexCheckbox }}
-						{{ /each}}
+			<div class="form-group row">
+				<div class="col-sm-3">
+					<label for="amount">Price</label>
+					<div class="input-group">
+					 	<div class="input-group-addon">$</div>
+					 	<input type="text" class="form-control" name="price" placeholder="Price of Item">
 					</div>
 				</div>
 
+				<div class="col-sm-3">
+					<label for="category-select">Category</label>
+					<select class="form-control" id="category-select" name="category">			
+						{{ #each categories }}
+							{{ > categoryDropdown }}
+						{{ /each }}
+					</select>
+				</div>
+
+				{{ #if selectedCategory.options }}
+					<div class="col-sm-4">
+						<label for="sexCheckbox">Sex</label>
+						<div class="checkbox" >
+							{{ #each selectedCategory.options }}
+								{{ > sexCheckbox }}
+							{{ /each}}
+						</div>
+					</div>
+
+				{{ /if }}
+			</div>
+
+			{{ #if subcategories }}
+				<label for="subcategoryCheckbox">Subcategories&nbsp;</label>
+				<div class="form-group row">
+					{{ #each subcategories }}
+						{{ > subcategoryCheckbox  }}
+					{{ /each }}
+				</div>
+			{{/if}}
+
+			<label for="sizes">In Stock </label>
+
+			{{ #if subcategories }}
+				<p class="help-block"> From left to right: XS, S, M, L, XL. Leave blank if 0.</p>
+				<div class="form-group row">
+					{{ #each sizes }}
+						{{ > stockInput }}
+					{{ /each }}
+				</div>
+			{{ else }}
+				<div class="form-group row">
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" name="general">
+					</div>
+				</div>
 			{{ /if }}
-		</div>
 
-		{{ #if subcategories }}
-			<label for="subcategoryCheckbox">Subcategories&nbsp;</label>
-			<div class="form-group row">
-				{{ #each subcategories }}
-					{{ > subcategoryCheckbox  }}
-				{{ /each }}
-			</div>
-		{{/if}}
-
-		<label for="sizes">In Stock </label>
-
-		{{ #if subcategories }}
-			<p class="help-block"> From left to right: XS, S, M, L, XL. Leave blank if 0.</p>
-			<div class="form-group row">
-				{{ #each sizes }}
-					{{ > stockInput }}
-				{{ /each }}
-			</div>
-		{{ else }}
+			<label for="additionalLabels">Additional Labels</label>
 			<div class="form-group row">
 
 				<div class="col-sm-2">
-					<input type="number" class="form-control" name="general">
+					<label class="checkbox-inline">
+							<input type="checkbox" name="sale"> On Sale
+					</label>
+				</div>
+				<div class="col-sm-2">
+					<label class="checkbox-inline">
+							<input type="checkbox" name="preorder"> Preorder
+					</label>
+		
 				</div>
 			</div>
-		{{ /if }}
 
-		<label for="additionalLabels">Additional Labels</label>
-		<div class="form-group row">
-
-			<div class="col-sm-2">
-				<label class="checkbox-inline">
-						<input type="checkbox" name="sale"> On Sale
-				</label>
+			<div class="form-group">
+				<label for="exampleInputFile">Photos</label>
+				<input type="file" id="exampleInputFile">
+				<p class="help-block">Example block-level help text here.</p>
 			</div>
-			<div class="col-sm-2">
-				<label class="checkbox-inline">
-						<input type="checkbox" name="preorder"> Preorder
-				</label>
-	
+
+			<div class="form-group row">
+				<div class="col-sm-8">
+					<label for="shippingNotes">Shipping Notes</label>
+					<textarea class="form-control" rows="2" value="Flat Rate $5"></textarea>
+				</div>
 			</div>
-		</div>
-
-		<div class="form-group">
-			<label for="exampleInputFile">Photos</label>
-			<input type="file" id="exampleInputFile">
-			<p class="help-block">Example block-level help text here.</p>
-		</div>
-
-		<div class="form-group row">
-			<div class="col-sm-8">
-				<label for="shippingNotes">Shipping Notes</label>
-				<textarea class="form-control" rows="2" value="Flat Rate $5"></textarea>
-			</div>
-		</div>
 
 
-		<button type="submit" class="btn btn-default">Add Item to Inventory</button>
-	</form>
-
+			<button type="submit" class="btn btn-default">Add Item to Inventory</button>
+		</form>
+	{{ else }}
+		Loading Page...
+	{{ /if }}
 
 
 
@@ -127,7 +131,7 @@
 </template>
 
 <template name="subcategoryCheckbox">
-	<div class="col-sm-2">
+	<div class="col-sm-2 col-lg-1">
 		<label class="checkbox-inline"><input type="checkbox" name={{ name }}>{{ name }} </label>
 	</div>
 </template>
@@ -139,7 +143,7 @@
 </template>
 
 <template name="stockInput">
-	<div class="col-sm-2">
+	<div class="col-sm-2 col-lg-1">
 		<input type="number" class="form-control" name={{this}} placeholder={{this}}>
 	</div>
 </template>

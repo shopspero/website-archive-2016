@@ -1,23 +1,31 @@
 Template.addInventory.onCreated(function() {
+	Session.set('selectedMen', false)
+	Session.set('selectedWomen', false)
 	this.subscribe("categories")
 	this.subscribe("inventoryCategories")
+
 })
 
 Template.addInventory.helpers({
 	categories: InventoryCategories.find({}),
 	selectedCategory: function() {
-		return Session.get('selectedCategory') || InventoryCategories.findOne({ name: "Clothes"})
+		if (! Session.get('selectedCategory')) {
+			// have to add latter because of subscription
+			Session.set('selectedCategory', InventoryCategories.findOne({ name: "Clothes"}))
+		}
+
+		return Session.get('selectedCategory') 
 	},
 	selectedMen: function() {
-		return Session.get('selectedMen') || false
+		return Session.get('selectedMen')
 	},
 	selectedWomen: function() {
-		return Session.get('selectedWomen') || false
+		return Session.get('selectedWomen')
 	},
 	subcategories: function() {
-		if (Session.get('selectedMen')) {
+		if (Session.get('selectedMen') && Session.get('selectedCategory').options) {
 			return InventoryCategories.findOne({name: "Clothes"}).options[1].subcategories
-		} else if (Session.get('selectedWomen')) {
+		} else if (Session.get('selectedWomen') && Session.get('selectedCategory').options) {
 			return InventoryCategories.findOne({name: "Clothes"}).options[0].subcategories 
 		} else {
 			return []
@@ -112,7 +120,7 @@ Template.addInventory.events({
      ,
      "change #sexWomen": function(event) {
      	Session.set('selectedWomen', event.target.checked)
-     	console.log('status.. women, men')
+     	console.log('status.. swomen, men')
      	console.log(Session.get('selectedWomen'))
      	console.log(Session.get('selectedMen'))
      }
