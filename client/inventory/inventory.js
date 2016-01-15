@@ -1,13 +1,43 @@
 Template.addInventory.onCreated(function() {
-	Session.set('selectedMen', false)
-	Session.set('selectedWomen', false)
-	Session.set('photos', [])
+
+	console.log("CREATED")
+
+	if (Session.get('garbagePhotos')) {
+		Session.get('garbagePhotos').forEach(function(public_id, index) {
+			console.log('deleting garbage..')
+			Cloudinary.delete(public_id, function(err, res) {
+				
+			})
+		})
+	}
+	
+	Session.setPersistent('garbagePhotos', [])
+
+	Session.set({ 
+		'selectedCategory': false,
+		'selectedMen': false,
+		'selectedWomen': false,
+		'photos': []
+	})
 	this.subscribe("categories")
 	this.subscribe("inventoryCategories")
 
 })
 
+Template.addInventory.onDestroyed(function(){
+	console.log('DESTROYed')
+	
+	Session.get('photos').forEach(function(public_id, index) {
+		console.log('deleting all..')
+		Cloudinary.delete(public_id, function(err, res) {
+			
+		})
+	})
+	
+})
+
 Template.addInventory.helpers({
+
 	categories: InventoryCategories.find({}),
 	selectedCategory: function() {
 		if (! Session.get('selectedCategory')) {
@@ -52,12 +82,13 @@ Template.addInventory.events({
 		newInventory.name = event.target.description.value;
 
 
-		var regex  = /^\d+(?:\.\d{0,2})$/;
+		var regex  = /^\d+(\.\d{0,2})?$/;
 		if (regex.test(event.target.price.value)) {
 			newInventory.price = parseFloat(event.target.price.value)
-			alert('good')
+			console.log('good')
 		} else {
-			alert('bad')
+			console.log('bad')
+			return
 		}
 
 		newInventory.category = event.target.category.value
@@ -86,15 +117,34 @@ Template.addInventory.events({
 		newInventory.sizes['general'] = (event.target.general && parseInt(event.target.general.value)) || 0
 
 
-		console.log(newInventory)
+		newInventory.photos = Session.get('photos')
 
-		// Clear form
-		event.target.name.value = "done";
 
-		newInventory.photos = []
-
+		newInventory.shippingNotes = event.target.shippingNotes.value;
 
 		newInventory.createdAt = new Date();
+
+		console.log(newInventory)
+
+
+		// Clear form
+		//event.target.name.value = "done";
+
+
+
+
+		template.find(".new-inventory").reset();
+		Session.set({ 
+			'selectedCategory': false,
+			'selectedMen': false,
+			'selectedWomen': false,
+			'photos': []
+		})
+
+		Session.set('garbagePhotos', [])
+
+
+
 
 
 
@@ -107,42 +157,43 @@ Template.addInventory.events({
 	"change #category-select": function(event){
         var categoryName = event.target.value
         Session.set('selectedCategory', InventoryCategories.findOne({name: categoryName}))
-        if (InventoryCategories.findOne({name: categoryName}).options) {
-        	console.log('yasss')
-        } else {
-        	console.log('noo')
-        }
         
     },
 
     "change #sexMen": function(event){
      	Session.set('selectedMen', event.target.checked)
-     	console.log('status.. women, men')
-     	console.log(Session.get('selectedWomen'))
-     	console.log(Session.get('selectedMen'))
     },
 	"change #sexWomen": function(event) {
 		Session.set('selectedWomen', event.target.checked)
-		console.log('status.. swomen, men')
-		console.log(Session.get('selectedWomen'))
-		console.log(Session.get('selectedMen'))
 	},
 
 	"change input[type='file']": function(event) {
 		var files = event.target.files
 		console.log(files)
-		Cloudinary.upload(files, { folder: "new-item" }, function(err, res) {
-          console.log("Upload Error: " + err);
-          console.log("Upload Result: " + res);
-          var photos = Session.get('photos')
-          photos.push(res.public_id)
-          Session.set('photos', photos)
+		Cloudinary.upload(files, { /*folder: 'todo' */ }, function(err, res) {
+			if (err) {
+				// do something
+				console.log("Upload Error: " + err);
+				return
+			}
+			
+			if (res) {
+				var photos = Session.get('photos')
+				photos.push(res.public_id)
+				Session.set('photos', photos)
+
+				var garbagePhotos = Session.get('garbagePhotos')
+				garbagePhotos.push(res.public_id)
+				Session.setPersistent('garbagePhotos', garbagePhotos)
+
+			}
+			
         });
 
 
     },
     "click .btn.btn-danger": function(event) {
-    	var public_id = event.target.name
+    	var public_id = event.target.id
     	var photos = Session.get('photos')
         photo_index = photos.indexOf(public_id);
         if (photo_index > -1) {
@@ -152,6 +203,43 @@ Template.addInventory.events({
     	Cloudinary.delete(public_id, function(err, res) {
     		console.log('success in deleting')
     	})
+    	
+    },
+
+    "click .order-left": function(event) {
+    	var public_id = event.target.id;
+
+
+    	if (public_id) {
+
+	    	var photos = Session.get('photos')
+	        photo_index = photos.indexOf(public_id);
+	    	if (photo_index != 0) {
+	    		var temp = photos[photo_index - 1]
+	    		photos[photo_index-1] = public_id
+	    		photos[photo_index] = temp
+	    		Session.set('photos', photos)
+	    	}
+
+
+	    }
+    },
+
+    "click .order-right": function(event) {
+    	var public_id = event.target.id;
+
+    	if (public_id) {
+
+	    	var photos = Session.get('photos')
+	        photo_index = photos.indexOf(public_id);
+	    	if (photo_index != photos.length - 1) {
+	    		var temp = photos[photo_index + 1]
+	    		photos[photo_index+1] = public_id
+	    		photos[photo_index] = temp
+	    		Session.set('photos', photos)
+    		}
+
+    	}
     	
     }
      

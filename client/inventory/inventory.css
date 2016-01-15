@@ -26,6 +26,10 @@
 
 .remove{
     float:right;
- 
+}
 
+#gallery {
+    border:lightgrey solid;
+    border-width:1px;
+    border-radius:5px;
 }

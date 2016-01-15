@@ -13,6 +13,7 @@
 	{{#if Template.subscriptionsReady }}
 
 		<form class="new-inventory">
+			{{ yo }}
 			<div class="form-group row">
 			
 				<div class="col-xs-5">
@@ -112,7 +113,7 @@
 						</div>
 					</div>
 					{{ #if photos }}
-						<div class="row" style="border:lightgrey solid;border-width:1px;border-radius:5px;">
+						<div class="row" id="gallery">
 
 							{{ #each photos }}
 								{{ > photo }}
@@ -123,7 +124,7 @@
 					{{ /if }}
 				<div class="row">
 					<div class="col-xs-12">
-					  	<span class="btn btn-primary btn-file">
+					  	<span class="btn btn-default btn-file">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add one or more photos <input type="file" multiple>
 						</span>
 					</div>
@@ -133,12 +134,12 @@
 			<div class="form-group row">
 				<div class="col-sm-8">
 					<label for="shippingNotes">Shipping Notes</label>
-					<textarea class="form-control" rows="2" value="Flat Rate $5"></textarea>
+					<textarea class="form-control" rows="2" name="shippingNotes" placeholder="Flat Rate $5"></textarea>
 				</div>
 			</div>
 
 
-			<button type="submit" class="btn btn-default">Add Item to Inventory</button>
+			<button type="submit" class="btn btn-warning btn-lg">Add Item to Inventory</button>
 		</form>
 	{{ else }}
 		Loading Page...
@@ -181,11 +182,11 @@
       		<div class="caption"> 
 
       			<div class="arrows">
-		        	<a href="#" class="btn btn-default btn-sm order" role="button" name="left"><span class="glyphicon glyphicon-menu-left"></span></a>
-		        	<a href="#" class="btn btn-default btn-sm order" role="button" name="right"><span class="glyphicon glyphicon-menu-right"></span></a>
+		        	<a href="#" class="btn btn-default btn-sm order-left" role="button" id={{this}}><span class="glyphicon glyphicon-menu-left" id={{this}}></span></a>
+		        	<a href="#" class="btn btn-default btn-sm order-right" role="button" id={{this}}><span class="glyphicon glyphicon-menu-right" id={{this}}></span></a>
 		        </div>
 		        <div class="remove">
-		        	<a href="#" class="btn btn-danger btn-sm" role="button" name={{this}}>Remove</a>
+		        	<a href="#" class="btn btn-danger btn-sm" role="button" id={{this}}>Remove</a>
 		        </div>
 		        <p><br></p>
 
@@ -193,19 +194,3 @@
     	</div>
   	</div>
 </template>
-
-<!--
-Items.insert({
-			name: "Hood " + i,
-			price: 40.00,
-			category: ['Women', 'Men'],
-			subcategories: ['sale', 'sweaters'],
-			photos: ['https://farm1.staticflickr.com/709/22187892342_c90a6fef31_b.jpg'],
-			sizes: {
-				'S': 30,
-				'M': 40,
-				'L': 20
-			},
-			createdAt: new Date()
-		});
-		-->
