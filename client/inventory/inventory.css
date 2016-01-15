@@ -17,3 +17,15 @@
     cursor: inherit;
     display: block;
 }
+
+.arrows {
+    float:left;
+ 
+
+}
+
+.remove{
+    float:right;
+ 
+
+}

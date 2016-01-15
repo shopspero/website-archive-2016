@@ -130,6 +130,7 @@ Template.addInventory.events({
 
 	"change input[type='file']": function(event) {
 		var files = event.target.files
+		console.log(files)
 		Cloudinary.upload(files, { folder: "new-item" }, function(err, res) {
           console.log("Upload Error: " + err);
           console.log("Upload Result: " + res);
@@ -139,7 +140,20 @@ Template.addInventory.events({
         });
 
 
-    }       
+    },
+    "click .btn.btn-danger": function(event) {
+    	var public_id = event.target.name
+    	var photos = Session.get('photos')
+        photo_index = photos.indexOf(public_id);
+        if (photo_index > -1) {
+        	photos.splice(photo_index, 1)
+        }
+        Session.set('photos', photos)
+    	Cloudinary.delete(public_id, function(err, res) {
+    		console.log('success in deleting')
+    	})
+    	
+    }
      
 
 });
