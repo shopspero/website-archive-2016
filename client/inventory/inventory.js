@@ -1,6 +1,7 @@
 Template.addInventory.onCreated(function() {
 	Session.set('selectedMen', false)
 	Session.set('selectedWomen', false)
+	Session.set('photos', [])
 	this.subscribe("categories")
 	this.subscribe("inventoryCategories")
 
@@ -33,7 +34,10 @@ Template.addInventory.helpers({
 	},
 	sizes: function() {
 		return ['XS', 'S', 'M', 'L', 'XL']
-	} 
+	},
+	photos: function() {
+		return Session.get('photos')
+	}
 })
 Template.addInventory.events({
 	"submit .new-inventory": function (event, template) {
@@ -109,21 +113,33 @@ Template.addInventory.events({
         	console.log('noo')
         }
         
-     },
+    },
 
-     "change #sexMen": function(event){
+    "change #sexMen": function(event){
      	Session.set('selectedMen', event.target.checked)
      	console.log('status.. women, men')
      	console.log(Session.get('selectedWomen'))
      	console.log(Session.get('selectedMen'))
-     }
-     ,
-     "change #sexWomen": function(event) {
-     	Session.set('selectedWomen', event.target.checked)
-     	console.log('status.. swomen, men')
-     	console.log(Session.get('selectedWomen'))
-     	console.log(Session.get('selectedMen'))
-     }
+    },
+	"change #sexWomen": function(event) {
+		Session.set('selectedWomen', event.target.checked)
+		console.log('status.. swomen, men')
+		console.log(Session.get('selectedWomen'))
+		console.log(Session.get('selectedMen'))
+	},
+
+	"change input[type='file']": function(event) {
+		var files = event.target.files
+		Cloudinary.upload(files, { folder: "new-item" }, function(err, res) {
+          console.log("Upload Error: " + err);
+          console.log("Upload Result: " + res);
+          var photos = Session.get('photos')
+          photos.push(res.public_id)
+          Session.set('photos', photos)
+        });
+
+
+    }       
      
 
 });

@@ -102,10 +102,33 @@
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label for="exampleInputFile">Photos</label>
-				<input type="file" id="exampleInputFile">
-				<p class="help-block">Example block-level help text here.</p>
+
+
+			<label for="photos">Photos</label>
+				<div class="form-group row">
+					{{ #each photos }}
+						{{ > photo }}
+					{{ /each }}
+					<div class="col-xs-6 col-sm-4 col-md-3">
+				    	<a href="#" class="thumbnail"  style="height:200px;">
+
+
+				      		<span class="btn btn-primary btn-file">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span><input type="file">
+							</span>
+				    	</a>
+				  	</div>
+
+				</div>
+			<div class="form-group row">
+				<div class="col-xs-4">
+					<span class="btn btn-primary btn-file">
+						Add Photo <input type="file">
+					</span>
+					
+
+					<p class="help-block">Example block-level help text here.</p>
+				</div>
 			</div>
 
 			<div class="form-group row">
@@ -147,6 +170,17 @@
 		<input type="number" class="form-control" name={{this}} placeholder={{this}}>
 	</div>
 </template>
+
+<template name="photo">
+
+
+	<div class="col-xs-6 col-sm-4 col-md-3">
+    	<a href="#" class="thumbnail">
+      		<img src="{{c.url this}}" class="img-thumbnail">
+    	</a>
+  	</div>
+</template>
+
 <!--
 Items.insert({
 			name: "Hood " + i,
