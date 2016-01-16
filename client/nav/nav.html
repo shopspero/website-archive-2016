@@ -17,7 +17,7 @@
                 	<li><a href="/about#vision">The Vision</a></li>
                 	<li><a href="/about#team">The Team</a></li>
                     -->
-                     {{ #if currentUser }}
+                    {{#if isInRole 'admin' 'default-group'}}
                         <li><a href="/inventory">Add/Edit Inventory</a></li>
                     {{/if}}
                     {{> loginButtons}}

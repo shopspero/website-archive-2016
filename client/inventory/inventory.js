@@ -170,7 +170,7 @@ Template.addInventory.events({
 	"change input[type='file']": function(event) {
 		var files = event.target.files
 		console.log(files)
-		Cloudinary.upload(files, { /*folder: 'todo' */ }, function(err, res) {
+		Cloudinary.upload(files, { folder: 'product' }, function(err, res) {
 			if (err) {
 				// do something
 				console.log("Upload Error: " + err);
