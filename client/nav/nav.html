@@ -20,6 +20,25 @@
                     {{#if isInRole 'admin' 'default-group'}}
                         <li><a href="/inventory">Add/Edit Inventory</a></li>
                     {{/if}}
+                    <li id="login-dropdown-list" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            Cart <span class="badge">{{ cart.count }}</span>
+                        </a>
+                        
+                        <div class="dropdown-menu">
+                            <div class="list-group">
+                                
+                                {{ #each cart }}
+                                    <a href="#" class="list-group-item">
+                                        <h4 class="list-group-item-heading">{{ name }}</h4>
+                                        <p class="list-group-item-text">$ {{ price }}</p>
+                                    </a>
+                                {{ /each }}
+                            </div>
+                            <h3>Total: $250 </h3>
+                            <button type="button" class="btn btn-block btn-danger">Checkout</button>
+                        </div>
+                    </li>
                     {{> loginButtons}}
                     <!--
                     <li><a href="#" class="btn btn- btn-lg order-left" role="button" id={{this}}><span class="glyphicon glyphicon-shopping-cart"></span></a></li>

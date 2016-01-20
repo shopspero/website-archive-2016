@@ -17,3 +17,15 @@ Template.mainNav.events({
 	},
 
 })
+
+Template.topNav.onCreated(function() {
+	this.subscribe('allItems')
+
+})
+
+
+
+Template.topNav.helpers({
+	  cart: Items.find({}, {limit: 2}),
+  	cartCount: 2
+})
