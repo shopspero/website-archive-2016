@@ -183,6 +183,7 @@ Template.addInventory.events({
 				Session.set('photos', photos)
 
 				var garbagePhotos = Session.get('garbagePhotos')
+				console.log(res.public_id)
 				garbagePhotos.push(res.public_id)
 				Session.setPersistent('garbagePhotos', garbagePhotos)
 

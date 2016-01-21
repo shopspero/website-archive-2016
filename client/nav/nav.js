@@ -27,5 +27,6 @@ Template.topNav.onCreated(function() {
 
 Template.topNav.helpers({
 	  cart: Items.find({}, {limit: 2}),
-  	cartCount: 2
+  	cartCount: 2,
+  	logo: "misc/Spero_Black.png"
 })
