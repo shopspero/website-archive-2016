@@ -1,6 +1,6 @@
 
 Template.mainNav.onCreated(function() {
-	this.subscribe('categories')
+	this.subscribe('categories');
 
 })
 
@@ -19,14 +19,21 @@ Template.mainNav.events({
 })
 
 Template.topNav.onCreated(function() {
-	this.subscribe('allItems')
+	this.subscribe('allItems');
+
 
 })
 
+Template.topNav.onRendered(function() {
+	$('.navbar-lower').affix({
+  		offset: {top: 50}
+	});
+})
 
 
 Template.topNav.helpers({
 	  cart: Items.find({}, {limit: 2}),
   	cartCount: 2,
-  	logo: "misc/Spero_Black.png"
+  	logo: "misc/Spero_Logo_White.png"
 })
+

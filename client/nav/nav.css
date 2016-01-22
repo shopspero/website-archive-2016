@@ -4,12 +4,7 @@
   vertical-align: top;
 }
 
-.navbar-nav > li > a, .navbar-brand {
-    padding-top:7px !important; 
-    padding-bottom:0 !important;
-    height: 35px;
-}
-.navbar {min-height:35px !important;}
+
 
 .navbar .navbar-collapse {
   text-align: center;
@@ -55,4 +50,45 @@
     left: 10px;
     top: 11px;
     left: -6px;
+}
+
+
+
+
+
+
+
+body{
+  margin-top: 50px;
+}
+
+.divide-nav{
+  height: 70px;
+  background-color: #222222;
+}
+
+.divide-text{
+    color:#FFF;
+    line-height: 20px;
+    font-size:30px;
+    padding: 35px 0;
+    text-align: center;
+
+}
+
+.affix {
+  top: 50px;
+  width:100%;
+}
+
+.filler{
+  min-height: 2000px;
+}
+
+.navbar-form {
+   padding-left: 0;
+}
+
+.navbar-collapse{
+   padding-left:0; 
 }

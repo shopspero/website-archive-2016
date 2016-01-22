@@ -1,6 +1,11 @@
 /* CSS declarations go here */
 
 
+.navbar {
+	border: none !important;
+  border-radius: 0 !important;
+
+}
 .navbar .navbar-nav {
   display: inline-block;
   float: none;

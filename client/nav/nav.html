@@ -1,17 +1,14 @@
 <template name="topNav">
-     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        	<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
 
             <div class="navbar-header">
-
-
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNav">
                     <!-- <span class="sr-only">Toggle navigation</span> -->
                 </button>
+                <a class="navbar-brand" href="/"> <img alt="brand" src="{{c.url logo width=25 height=25 crop="fill"}}" id="brand-logo"></a>
             </div>
-            <img src="{{c.url logo width=20 height=20 crop="fill"}}" class="img-thumbnail" >
-                <a class="navbar-brand" href="/"> Shop Spero</a>
-				<div class="navbar-collapse collapse navbar-right" id="topNav">
+        	<div class="navbar-collapse collapse navbar-right" id="topNav">
                 <ul class="nav navbar-nav">
                 	<li><a href="/about">About Spero</a></li>
                     <!--
@@ -47,17 +44,12 @@
                 </ul>
 
             </div>
-
-
-
-
-        
         </div>
     </nav>
 </template>
 
 <template name="mainNav">
-     <nav class="navbar" role="navigation">
+     <nav class="navbar navbar-inverse navbar-lower" role="navigation">
         <div class="container">
         	
             <div class="navbar-header">
@@ -120,3 +112,5 @@
 <template name="subcategory">
     <li><a class="elem" href="{{../categoryUrl}}?subcategory={{query}}" >{{name}}</a></li>
 </template>
+
+
