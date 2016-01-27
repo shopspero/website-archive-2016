@@ -53,14 +53,16 @@
 }
 
 
-
-
-
-
-
-body{
-  margin-top: 50px;
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color:white;
+    background-color: #222222;
 }
+
+
+
+body { padding-top: 50px; }
+
+
 
 .divide-nav{
   height: 70px;
@@ -79,6 +81,7 @@ body{
 .affix {
   top: 50px;
   width:100%;
+  z-index: 10;
 }
 
 .filler{

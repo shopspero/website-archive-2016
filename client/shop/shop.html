@@ -1,13 +1,30 @@
 <template name="shopContent">
   {{ name }} {{ subcategoryName }}
   {{#if Template.subscriptionsReady }}
-    {{ #with coverItem }}
-      
-      {{ > categoryCover }} <!-- load url from js the file -->
-    {{ /with }}
-    {{#each items}}
-      {{> item}}
-    {{/each}}
+    <div class="row">
+        <div class="col-xs-12">
+            {{ #with coverItem }}
+              
+              {{ > categoryCover }} <!-- load url from js the file -->
+            {{ /with }}
+        </div>
+    </div>
+    <br>
+    Sort by: <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default">Price</button>
+        <button type="button" class="btn btn-default">Recently Added</button>
+        <button type="button" class="btn btn-default">Most Popular</button>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+    
+
+        {{#each items}}
+          {{> item}}
+        {{/each}}
+     </div>
+
   {{ else }}
   Loading...
   {{/if}}
@@ -43,8 +60,14 @@
 </template>
 
 <template name="item">
-  <p> Name: {{ name }} </p>
-  <p> Price: {{ price }} </p>
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <a href="#" class="thumbnail">
+            <div style="width:100%;height:200px;border:2px solid #000;background-color: #666699"></div>
+            <p> Name: {{ name }} </p>
+            <p> Price: {{ price }} </p>
+        </a>
+    </div>
+
 </template>
 
 <template name="sale">
