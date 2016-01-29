@@ -1,5 +1,6 @@
 Template.addInventory.onCreated(function() {
 
+
 	console.log("CREATED")
 
 	if (Session.get('garbagePhotos')) {
@@ -17,7 +18,8 @@ Template.addInventory.onCreated(function() {
 		'selectedCategory': false,
 		'selectedMen': false,
 		'selectedWomen': false,
-		'photos': []
+		'photos': [],
+		'errors': []
 	})
 	this.subscribe("categories")
 	this.subscribe("inventoryCategories")
@@ -36,6 +38,9 @@ Template.addInventory.onDestroyed(function(){
 	
 })
 
+Template.addInventory.onRendered(function() {
+	$('#price-error').hide();
+})
 Template.addInventory.helpers({
 
 	categories: InventoryCategories.find({}),
@@ -67,8 +72,13 @@ Template.addInventory.helpers({
 	},
 	photos: function() {
 		return Session.get('photos')
+	},
+	errors: function() {
+		return Session.get('errors')
 	}
 })
+
+
 Template.addInventory.events({
 	"submit .new-inventory": function (event, template) {
 		// Prevent default browser form submit
@@ -76,37 +86,48 @@ Template.addInventory.events({
 
 		var newInventory = {}
 
-		// Get value from form element
+		// Get name
 		newInventory.name = event.target.name.value;
+		if (! newInventory.name) {
+			Session.set('errors', Session.get('errors').push())
+		}
 
-		newInventory.name = event.target.description.value;
+
+		newInventory.description = event.target.description.value;
 
 
 		var regex  = /^\d+(\.\d{0,2})?$/;
 		if (regex.test(event.target.price.value)) {
 			newInventory.price = parseFloat(event.target.price.value)
 			console.log('good')
+			Session.set('errors', [])
 		} else {
 			console.log('bad')
+			Session.set('errors', ['price'])
+
 			return
 		}
 
-		newInventory.category = event.target.category.value
+
+
+
+		newInventory.category = event.target.category.value.toLowerCase();
 
 		newInventory.sex = []
 		if (Session.get('selectedMen')) {
-			newInventory.sex.push('Men');
+			newInventory.sex.push('men');
 		}
 		if (Session.get('selectedWomen')) {
-			newInventory.sex.push('Women');
+			newInventory.sex.push('women');
 		}
 
 		// additional options
 		newInventory.sale = event.target.sale.checked
 		newInventory.preorder = event.target.preorder.checked
 
+		newInventory.subcategories = {}
 		InventoryCategories.findOne({name: "Clothes"}).options[0].subcategories.forEach(function(subcategory, index){
-			newInventory[subcategory.name] = (event.target[subcategory.name] && event.target[subcategory.name].checked) || false
+			newInventory.subcategories[subcategory.query] = (event.target[subcategory.name] && event.target[subcategory.name].checked) || false
 		});
 
 		var sizes = template.view.template.__helpers.get('sizes').call()
@@ -125,6 +146,8 @@ Template.addInventory.events({
 		newInventory.createdAt = new Date();
 
 		console.log(newInventory)
+
+		Items.insert(newInventory);
 
 
 		// Clear form

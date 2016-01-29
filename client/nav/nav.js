@@ -1,12 +1,12 @@
 
 Template.mainNav.onCreated(function() {
-	this.subscribe('categories');
+	this.subscribe('navCategories');
 
 })
 
 
 Template.mainNav.helpers({
-  categories: Categories.find({})
+  categories: NavCategories.find({})
 
 });
 

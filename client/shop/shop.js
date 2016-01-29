@@ -16,28 +16,34 @@ Template.shopContent.onCreated(function() {
 
 Template.shopContent.helpers({
 	name: function() {
-		return Template.currentData().category.name
+		return Template.currentData().sex || Template.currentData().category.name
 	},
 	subcategoryName: function() {
-		return (Template.currentData().subcategory && ('- ' + Template.currentData().subcategory.name)) || ''
+		return (Template.currentData().subcategory && ('/ ' + Template.currentData().subcategory.name)) || ''
 	},
 	coverItem: function() {
 		/* http://dweldon.silvrback.com/guards */
 		var one;
 		if (Template.currentData().subcategory) {
-			one = Items.findOne({category: Template.currentData().category.name, subcategories: Template.currentData().subcategory.query }, { sort: { createdAt: -1 }})
+			var subcategorySelect = 'subcategories.' + Template.currentData().subcategory.query
+			var query = {category: Template.currentData().category.query}
+			query[subcategorySelect] = true;
+			one = Items.findOne(query, { sort: { createdAt: -1 }})
 		} else {
-			one =  Items.findOne({category: Template.currentData().category.name }, { sort: { createdAt: -1 }})
+			one =  Items.findOne({category: Template.currentData().category.query }, { sort: { createdAt: -1 }})
 		}
 		//var one = Items.findOne({category: Template.currentData().category.name}, { sort: { createdAt: -1 }})
-		return one && one.photos[0]
+		return one && one.photos[1]
 	},
 	items: function() {
-
+	
 		if (Template.currentData().subcategory) {
-			return Items.find({category: Template.currentData().category.name, subcategories: Template.currentData().subcategory.query }, { sort: { createdAt: -1 }})
+			var subcategorySelect = 'subcategories.' + Template.currentData().subcategory.query
+			var query = {category: Template.currentData().category.query}
+			query[subcategorySelect] = true;
+			return Items.find(query, { sort: { createdAt: -1 }})
 		} else {
-			return Items.find({category: Template.currentData().category.name }, { sort: { createdAt: -1 }})
+			return Items.find({category: Template.currentData().category.query }, { sort: { createdAt: -1 }})
 		}
 	}
 
