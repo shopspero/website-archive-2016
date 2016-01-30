@@ -1,6 +1,6 @@
+//set cart to nothing
+Session.setDefaultPersistent('cart', [])
 
-// counter starts at 0 WORK WITH SESSIONS...
-Session.setDefault('counter', 0);
 
 Template.homeContent.helpers({
   counter: function () {

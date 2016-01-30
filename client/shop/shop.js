@@ -49,3 +49,14 @@ Template.shopContent.helpers({
 
 })
 
+
+Template.shopContent.events({
+	"click .add": function(event) {
+    	var item_id = event.target.id;
+
+    	var cart = Session.get('cart')
+    	cart.push(item_id)
+    	Session.setPersistent('cart', cart)
+    }
+})
+

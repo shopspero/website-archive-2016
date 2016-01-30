@@ -1,5 +1,5 @@
 <template name="shopContent">
-  <h2> <strong>{{ name }} </strong><span style="font-size:.7em;">{{ subcategoryName }}</span> </h2>
+  <h3> <strong>{{ name }} </strong><span style="font-size:.7em;">{{ subcategoryName }}</span> </h3>
   <br>
   {{#if Template.subscriptionsReady }}
     <div class="row">
@@ -19,8 +19,6 @@
     <br>
     <br>
     <div class="row">
-    
-
         {{#each items}}
           {{> item}}
         {{/each}}
@@ -65,9 +63,31 @@
         <a href="#" class="thumbnail">
             <img src="{{c.url photos.[0] width=200 height=200 crop="fill"}}">
             <div class="caption"> 
-                <p> {{ name }} </p>
-                <p> ${{ price }} </p>
+
+                <p class="text-center"><h4>{{name}}</h4></p>
+                <p class="text-center"><h5>$ {{ price }}</h5></p>
+                <button type="button" class="btn btn-default" aria-label="Left Align" >
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default add" aria-label="Left Align" id={{_id}}>
+                    <span class="
+glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="
+glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="
+glyphicon glyphicon-share" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="
+glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                </button>
+                
             </div>
+
         </a>
     </div>
 
