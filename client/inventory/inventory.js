@@ -11,8 +11,15 @@ Template.addInventory.onCreated(function() {
 			})
 		})
 	}
-	
+
+	if (Session.get('garbageItem')) {
+		console.log(Items.find(Session.get('garbageItem')))
+		Items.remove(Session.get('garbageItem'))
+	}
+	console.log(Items.find(Session.get('garbageItem')))
+	console.log('w')
 	Session.setPersistent('garbagePhotos', [])
+	Session.setPersistent('garbageItem', '')
 
 	Session.set({ 
 		'selectedCategory': false,
@@ -27,7 +34,7 @@ Template.addInventory.onCreated(function() {
 })
 
 Template.addInventory.onDestroyed(function(){
-	console.log('DESTROYed')
+	console.log('DESTROYED')
 	
 	Session.get('photos').forEach(function(public_id, index) {
 		console.log('deleting all..')
@@ -147,7 +154,7 @@ Template.addInventory.events({
 
 		console.log(newInventory)
 
-		Items.insert(newInventory);
+		Items.update(Session.get('garbageItem'), newInventory);
 
 
 		// Clear form
@@ -164,7 +171,8 @@ Template.addInventory.events({
 			'photos': []
 		})
 
-		Session.set('garbagePhotos', [])
+		Session.setPersistent('garbagePhotos', [])
+		Session.setPersistent('garbageItem', '')
 
 
 
@@ -191,9 +199,17 @@ Template.addInventory.events({
 	},
 
 	"change input[type='file']": function(event) {
+
+
+		if (Session.get('garbageItem') == '') {
+			var garbage_id = Items.insert({})
+			Session.setPersistent('garbageItem', garbage_id)
+		}
+
+
 		var files = event.target.files
 		console.log(files)
-		Cloudinary.upload(files, { folder: 'product' }, function(err, res) {
+		Cloudinary.upload(files, { folder: 'products/product-'+ Session.get('garbageItem') }, function(err, res) {
 			if (err) {
 				// do something
 				console.log("Upload Error: " + err);
@@ -217,7 +233,7 @@ Template.addInventory.events({
 
     },
     "click .btn.btn-danger": function(event) {
-    	var public_id = event.target.id
+    	var public_id = this.toString()
     	var photos = Session.get('photos')
         photo_index = photos.indexOf(public_id);
         if (photo_index > -1) {
@@ -231,8 +247,7 @@ Template.addInventory.events({
     },
 
     "click .order-left": function(event) {
-    	var public_id = event.target.id;
-
+    	var public_id = this.toString();
 
     	if (public_id) {
 
@@ -250,7 +265,7 @@ Template.addInventory.events({
     },
 
     "click .order-right": function(event) {
-    	var public_id = event.target.id;
+    	var public_id = this.toString();
 
     	if (public_id) {
 
