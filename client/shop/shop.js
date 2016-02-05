@@ -1,15 +1,7 @@
-/* default crap.. use session */
-Template.homeContent.helpers({
-  counter: function () {
-    return Session.get('counter');
-  }
-});
-
 Template.shopContent.onCreated(function() {
 	this.category = Template.currentData().category
 	this.subcategory = (Template.currentData().subcategory && Template.currentData().subcategory.name) || ''
 	this.subscribe('allItems')
-	//this.subscribe('items', this.category, this.subcategory)
 })
 
 
@@ -34,7 +26,17 @@ Template.shopContent.helpers({
 		if (Template.currentData().category.name == 'New Arrivals') {
 			var newArrivalDate = new Date();
 			newArrivalDate.setMonth(newArrivalDate.getMonth() - 1)
-			findQuery.createdAt = { $gte : newArrivalDate }		
+			findQuery.createdAt = { $gte : newArrivalDate },
+			delete findQuery.category; 		
+		}
+
+		if (Template.currentData().category.name == 'Sale') {
+			delete findQuery.category;
+			findQuery.sale = true;
+		}
+
+		if (Template.currentData().category.name == 'All') {
+			delete findQuery.category;
 		}
 		
 		if  (Template.currentData().subcategory) {
@@ -43,7 +45,7 @@ Template.shopContent.helpers({
 		}
 
 		var one = Items.findOne(findQuery, { sort: { createdAt: -1 }})
-		return one && one.photos[1]
+		return one && (one.photos[1] || one.photos[0])
 	},
 	items: function() {
 		var findQuery = {};
@@ -57,14 +59,22 @@ Template.shopContent.helpers({
 			var newArrivalDate = new Date();
 			newArrivalDate.setMonth(newArrivalDate.getMonth() - 1)
 			findQuery.createdAt = { $gte : newArrivalDate }
+			delete findQuery.category; 	
 		}
 		
+		if (Template.currentData().category.name == 'Sale') {
+			delete findQuery.category;
+			findQuery.sale = true;
+		}
+
+		if (Template.currentData().category.name == 'All') {
+			delete findQuery.category;
+		}
+
 		if  (Template.currentData().subcategory) {
 			var subcategorySelect = 'subcategories.' + Template.currentData().subcategory.query
 			findQuery[subcategorySelect] = true;
 		}
-
-
 		return Items.find(findQuery, { sort: { createdAt: -1 }})
 	}
 
@@ -73,7 +83,6 @@ Template.shopContent.helpers({
 
 Template.shopContent.events({
 	"click .add": function(event) {
-    	var item_id = event.target.id;
     	var cart = Session.get('cart')
     	cart.push(this._id)
     	Session.setPersistent('cart', cart)

@@ -28,14 +28,17 @@
 
                         <div class="dropdown-menu">
                             <div class="list-group">
-
-                                {{ #each cart }}
-                                    {{ > cartItem}}
-                                   
-                                {{ /each }}
+                                {{#if cart}}
+                                    {{ #each cart }}
+                                        {{ >  navCartItem }}
+                                    {{ /each }}
+                                {{ else }}
+                                    <h4> Cart is Empty Yo, Time to Shop</h4>
+                                {{ /if}}
+                                
                             </div>
                             <h3>Total: ${{totalPrice}} </h3>
-                            <button type="button" class="btn btn-block btn-danger">Checkout</button>
+                            <a href="/cart" class="btn btn-block btn-danger" role="button">Checkout</a>
                         </div>
                     </li>
                     {{> loginButtons}}
@@ -49,7 +52,7 @@
     </nav>
 </template>
 
-<template name="cartItem">
+<template name="navCartItem">
     <a href="#" class="list-group-item">
         <h4 class="list-group-item-heading">{{ name }}</h4>
         <p class="list-group-item-text">$ {{ price }}</p>

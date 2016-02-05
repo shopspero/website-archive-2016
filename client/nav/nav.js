@@ -35,7 +35,10 @@ Template.topNav.helpers({
 	cart: function() {
 		var cart = []
 		Session.get('cart').forEach(function(item_id, index) {
-			cart.push(Items.findOne(item_id))
+			var item = Items.findOne(item_id)
+			if (item) {
+				cart.push(Items.findOne(item_id))
+			}
 		})
 		return cart
 	},
@@ -47,7 +50,11 @@ Template.topNav.helpers({
   		var total = 0
   		
 		Session.get('cart').forEach(function(item_id, index) {
-			total += Items.findOne(item_id).price
+			console.log(item_id)
+			var item = Items.findOne(item_id)
+			if (item) {
+				total += item.price
+			}
 		})
 		return total
   	}

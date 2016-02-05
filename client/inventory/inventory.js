@@ -5,7 +5,7 @@ Template.addInventory.onCreated(function() {
 
 	if (Session.get('garbagePhotos')) {
 		Session.get('garbagePhotos').forEach(function(public_id, index) {
-			console.log('deleting garbage..')
+			console.log('deleting garbage photos...')
 			Cloudinary.delete(public_id, function(err, res) {
 				
 			})
@@ -13,11 +13,10 @@ Template.addInventory.onCreated(function() {
 	}
 
 	if (Session.get('garbageItem')) {
-		console.log(Items.find(Session.get('garbageItem')))
+		console.log('deleting garbage item...')
 		Items.remove(Session.get('garbageItem'))
 	}
-	console.log(Items.find(Session.get('garbageItem')))
-	console.log('w')
+	
 	Session.setPersistent('garbagePhotos', [])
 	Session.setPersistent('garbageItem', '')
 
@@ -45,9 +44,6 @@ Template.addInventory.onDestroyed(function(){
 	
 })
 
-Template.addInventory.onRendered(function() {
-	$('#price-error').hide();
-})
 Template.addInventory.helpers({
 
 	categories: InventoryCategories.find({}),

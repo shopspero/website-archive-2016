@@ -1,0 +1,28 @@
+<template name="cartContent">
+	<h1> Cart </h1>
+	<hr/>
+	{{#if Template.subscriptionsReady }}
+		{{#if cartItems}}
+
+			{{ #each cartItems }}
+				{{ > cartItem }}
+			{{ /each }}
+		{{ else }}
+			<h4> Cart is Empty </h4>
+		{{ /if}}
+		<hr>
+		<h1> Total: ${{totalPrice}} </h1>
+
+	{{/if}}
+
+
+	<hr/>
+</template>
+
+
+<template name="cartItem">
+	<div class="row">
+		{{ name }}, ${{ price}}
+	</div>
+
+</template>
