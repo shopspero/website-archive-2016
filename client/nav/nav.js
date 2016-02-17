@@ -45,7 +45,7 @@ Template.topNav.helpers({
   	cartCount: function() {
   		return Session.get('cart').length
   	},
-  	logo: "misc/Spero_Logo_White.png",
+  	logo: "misc/Spero_Logo_Black",
   	totalPrice: function() {
   		var total = 0
   		

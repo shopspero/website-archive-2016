@@ -1,5 +1,5 @@
 <template name="topNav">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-top" role="navigation">
         <div class="container">
 
             <div class="navbar-header">
@@ -9,15 +9,10 @@
                     <span class="icon-bar"></span>  
                     <!-- <span class="sr-only">Toggle navigation</span> -->
                 </button>
-                <a class="navbar-brand" href="/"> <img alt="brand" src="{{c.url logo width=25 height=25 crop="fill"}}" id="brand-logo"></a>
+                <a class="navbar-brand" href="/"> <!-- <img alt="brand" src="{{c.url logo width=25 height=25 crop="fill"}}" class="navbar-brand-logo">--> <h4>Shop Spero</h4></a>
             </div>
         	<div class="navbar-collapse collapse navbar-right" id="topNav">
                 <ul class="nav navbar-nav">
-                	<li><a href="/about">About Spero</a></li>
-                    <!--
-                	<li><a href="/about#vision">The Vision</a></li>
-                	<li><a href="/about#team">The Team</a></li>
-                    -->
                     {{#if isInRole 'admin' 'default-group'}}
                         <li><a href="/inventory">Add/Edit Inventory</a></li>
                     {{/if}}
@@ -61,7 +56,7 @@
 </template>
 
 <template name="mainNav">
-     <nav class="navbar navbar-inverse navbar-lower" role="navigation">
+     <nav class="navbar navbar-default navbar-lower" role="navigation">
         <div class="container">
         	
             <div class="navbar-header">
