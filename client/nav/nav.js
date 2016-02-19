@@ -25,13 +25,7 @@ Template.topNav.onRendered(function() {
 	$('.navbar-lower').affix({
   		offset: {top: 50}
 	});
-	$(".navbar-default").hover(
-		function() { //mouseEnter
-			$(".navbar-default").css('opacity', 1.0);
-		},
-		function() { //mouseLeave
-			$(".navbar-default").css('opacity', 0.7);
-		});
+
 })
 
 
@@ -83,6 +77,23 @@ Template.topNav.events({
     	cart.splice(index, 1);
     	Session.setPersistent('cart', cart)
     	
-    }
+    },
+    "mouseenter .navbar-default": function(event) {
+    	$(".navbar-default").css('opacity', 1.0);
+	},
+	"mouseleave .navbar-default": function(event) {
+		$(".navbar-default").css('opacity', 0.7);	
+	}
 })
+
+Template.mainNav.events({
+    "mouseenter .navbar-default": function(event) {
+    	$(".navbar-default").css('opacity', 1.0);
+	},
+	"mouseleave .navbar-default": function(event) {
+		$(".navbar-default").css('opacity', 0.7);	
+	}
+})
+
+
 
