@@ -1,14 +1,11 @@
 
-Template.mainNav.onCreated(function() {
-	this.subscribe('navCategories');
-
-})
 
 
 Template.mainNav.helpers({
-  categories: NavCategories.find({})
+  categories: navCategories
 
 });
+
 
 Template.mainNav.events({
 	'click .elem': function() {
@@ -28,10 +25,28 @@ Template.topNav.onRendered(function() {
 	$('.navbar-lower').affix({
   		offset: {top: 50}
 	});
+	$(".navbar-default").hover(
+		function() { //mouseEnter
+			$(".navbar-default").css('opacity', 1.0);
+		},
+		function() { //mouseLeave
+			$(".navbar-default").css('opacity', 0.7);
+		});
 })
 
 
 Template.topNav.helpers({
+	checkCart: function() {
+		var cart = Session.get('cart');
+		cart.forEach(function(item_id, index) {
+			var item = Items.findOne(item_id)
+			if  (! item) {
+				delete_index = Session.get('cart').indexOf(item_id);
+				cart.splice(delete_index, 1);
+			}
+		})
+		Session.setPersistent('cart', cart)
+	},
 	cart: function() {
 		var cart = []
 		Session.get('cart').forEach(function(item_id, index) {

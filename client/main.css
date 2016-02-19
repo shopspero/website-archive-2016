@@ -10,6 +10,7 @@
   display: inline-block;
   float: none;
   vertical-align: top;
+
 }
 
 .navbar .navbar-collapse {
@@ -25,3 +26,7 @@ a.home-button {
 	color: black;
 }
 
+img#home_cover {
+	max-width: 100% !important;
+	height: auto !important;
+}

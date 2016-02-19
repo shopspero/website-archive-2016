@@ -82,8 +82,9 @@
 }
 
 
-
-
+.nav-pills>li+li {
+  margin-left: 2em; /* 2px by default */
+} 
 
 .divide-nav{
   height: 70px;
@@ -117,6 +118,9 @@
    padding-left:0; 
 }
 
+.navbar {
+    min-height: 40px !important;
+}
 
 /* change shiz */
 
@@ -125,6 +129,11 @@
 .navbar-default {
     background-color: #F8F8F8;
     border-color: #E7E7E7;
+    opacity: 0.7;
+}
+
+.navbar-default:hover {
+  opacity: 1.0;
 }
 /* title */
 .navbar-default .navbar-brand {
@@ -164,6 +173,10 @@
     border-top-color: #333;
     border-bottom-color: #333;
 }
+
+.nav-pills > li > a {
+    color: #000;
+}
 .navbar-default .navbar-nav > .open > a .caret, 
 .navbar-default .navbar-nav > .open > a:hover .caret, 
 .navbar-default .navbar-nav > .open > a:focus .caret {
@@ -192,3 +205,6 @@
 }
 
 
+.affix {
+    opacity: 1 !important;
+}

@@ -9,14 +9,18 @@
                     <span class="icon-bar"></span>  
                     <!-- <span class="sr-only">Toggle navigation</span> -->
                 </button>
-                <a class="navbar-brand" href="/"> <!-- <img alt="brand" src="{{c.url logo width=25 height=25 crop="fill"}}" class="navbar-brand-logo">--> <h4>Shop Spero</h4></a>
+                <a class="navbar-brand" href="/"> <!-- <img alt="brand" src="{{c.url logo width=25 height=25 crop="fill"}}" class="navbar-brand-logo">--> Shop Spero</a>
             </div>
         	<div class="navbar-collapse collapse navbar-right" id="topNav">
                 <ul class="nav navbar-nav">
                     {{#if isInRole 'admin' 'default-group'}}
                         <li><a href="/inventory">Add/Edit Inventory</a></li>
                     {{/if}}
+
+                    {{> loginButtons}}
+
                     <li id="login-dropdown-list" class="dropdown">
+                        {{ checkCart }}
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             Cart ({{ cartCount }})
                         </a>
@@ -36,7 +40,7 @@
                             <a href="/cart" class="btn btn-block btn-danger" role="button">Checkout</a>
                         </div>
                     </li>
-                    {{> loginButtons}}
+                    
                     <!--
                     <li><a href="#" class="btn btn- btn-lg order-left" role="button" id={{this}}><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                     -->
@@ -102,7 +106,7 @@
 <template name="category">
     <li class="dropdown">
         {{ #if subcategories.length }}
-            <a href={{categoryUrl}} id="dropthedown" data-toggle="dropdown" class="dropdown-toggle disabled">{{name}} <b class="caret"></b></a>
+            <a href={{categoryUrl}} id="dropthedown" data-toggle="dropdown" class="dropdown-toggle disabled">{{name}} <!--<b class="caret"></b> --></a>
             <ul class="dropdown-menu" id="menu1">
 
                 {{ #each subcategories }}

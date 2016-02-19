@@ -30,9 +30,8 @@ Template.shopContent.helpers({
 			delete findQuery.category; 		
 		}
 
-		if (Template.currentData().category.name == 'Sale') {
-			delete findQuery.category;
-			findQuery.sale = true;
+		if (Template.currentData().category.name == 'Misc') {
+			findQuery.category = 'misc';
 		}
 
 		if (Template.currentData().category.name == 'All') {
@@ -60,11 +59,6 @@ Template.shopContent.helpers({
 			newArrivalDate.setMonth(newArrivalDate.getMonth() - 1)
 			findQuery.createdAt = { $gte : newArrivalDate }
 			delete findQuery.category; 	
-		}
-		
-		if (Template.currentData().category.name == 'Sale') {
-			delete findQuery.category;
-			findQuery.sale = true;
 		}
 
 		if (Template.currentData().category.name == 'All') {

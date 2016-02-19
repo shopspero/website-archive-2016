@@ -5,7 +5,8 @@ Session.setDefaultPersistent('cart', [])
 Template.homeContent.helpers({
   counter: function () {
     return Session.get('counter');
-  }
+  },
+  home_cover: 'misc/home_cover'
 });
 
 Template.homeCover.events({
