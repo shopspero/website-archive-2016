@@ -22,7 +22,7 @@
                     <li id="login-dropdown-list" class="dropdown">
                         {{ checkCart }}
                         <a class="dropdown-toggle" data-toggle="dropdown">
-                            Cart ({{ cartCount }})
+                            <i class="fa fa-shopping-cart"></i> Cart ({{ cartCount }})
                         </a>
 
                         <div class="dropdown-menu">
@@ -32,7 +32,7 @@
                                         {{ >  navCartItem }}
                                     {{ /each }}
                                 {{ else }}
-                                    <h4> Cart is Empty Yo, Time to Shop</h4>
+                                    <h4> Cart is Empty.</h4>    
                                 {{ /if}}
                                 
                             </div>
@@ -52,10 +52,17 @@
 </template>
 
 <template name="navCartItem">
+    <!-- link to item in a href="#"ez-->
     <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{{ name }}</h4>
+        <img src="{{c.url photos.[0] width=100 height=100 crop="fill"}}">
+        <div class = "info-container">
+        <p class="list-group-item-text">{{ name }}</p>
         <p class="list-group-item-text">$ {{ price }}</p>
-        <a href="#" class="btn btn-danger btn-sm remove" role="button" id={{_id}}>Remove</a>
+        <p class="list-group-item-text"> SIZE OF ITEM GOES HERE</p>
+        </div>
+        <div class = "remove-container">
+        <a href="#" class="btn btn-danger btn-sm remove" role="button" position="relative" id={{_id}}>Remove</a>
+        </div>
     </a>
 </template>
 

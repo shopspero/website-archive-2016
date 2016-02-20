@@ -72,8 +72,8 @@ Template.topNav.helpers({
 Template.topNav.events({
 	"click .remove": function(event) {
     	var item_id = event.target.id;
-    	var index = Session.get('cart').indexOf(item_id)
-    	var cart = Session.get('cart')
+        var cart = Session.get('cart')
+    	var index = cart.indexOf(item_id)
     	cart.splice(index, 1);
     	Session.setPersistent('cart', cart)
     	
