@@ -32,10 +32,10 @@ Template.topNav.onRendered(function() {
 Template.topNav.helpers({
 	checkCart: function() {
 		var cart = Session.get('cart');
-		cart.forEach(function(item_id, index) {
-			var item = Items.findOne(item_id)
+		cart.forEach(function(cartItem, index) {
+			var item = Items.findOne(cartItem.productId)
 			if  (! item) {
-				delete_index = Session.get('cart').indexOf(item_id);
+				delete_index = Session.get('cart').indexOf(cartItem);
 				cart.splice(delete_index, 1);
 			}
 		})
@@ -43,10 +43,12 @@ Template.topNav.helpers({
 	},
 	cart: function() {
 		var cart = []
-		Session.get('cart').forEach(function(item_id, index) {
-			var item = Items.findOne(item_id)
+		Session.get('cart').forEach(function(cartItem, index) {
+			var item = Items.findOne(cartItem.productId)
 			if (item) {
-				cart.push(Items.findOne(item_id))
+				item.selectedSize = cartItem.size
+				item.selectedQuantity = cartItem.quantity
+				cart.push(item);
 			}
 		})
 		return cart
@@ -56,13 +58,23 @@ Template.topNav.helpers({
   	},
   	logo: "misc/Spero_Logo_Black",
   	totalPrice: function() {
+
+  		function sum( obj ) {
+			var sum = 0;
+		  	for( var el in obj ) {
+		    	if (obj.hasOwnProperty(el) ) {
+		      		sum += parseFloat( obj[el] );
+		    	}
+		  	}
+		  return sum;
+		}
+
   		var total = 0
   		
-		Session.get('cart').forEach(function(item_id, index) {
-			console.log(item_id)
-			var item = Items.findOne(item_id)
+		Session.get('cart').forEach(function(cartItem, index) {
+			var item = Items.findOne(cartItem.productId)
 			if (item) {
-				total += item.price
+				total += item.price * cartItem.quantity
 			}
 		})
 		return total

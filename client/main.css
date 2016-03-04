@@ -6,6 +6,7 @@
   src: url('/fonts/couture-bld.otf');
   font-weight: normal;
   font-style: normal;
+  font-size:12px;
 
 }
 /* font declaration for chunkfont*/
@@ -17,7 +18,24 @@
   
 }
 
-/*html * {
+@font-face {
+  text-align: center;
+  font-size: 12px;
+  color: black;
+  font-family: 'Prata', serif;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+@font-face {
+  font-size: 14px;
+  font-family: "Lora", serif;
+  src: url('https://fonts.googleapis.com/css?family=Lora:400italic');
+  text-align: center;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+/*
+html * {
     font-family: 'couture' !important;
 }
 */

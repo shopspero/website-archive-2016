@@ -37,7 +37,7 @@
                                 
                             </div>
                             <h3>Total: ${{totalPrice}} </h3>
-                            <a href="/cart" class="btn btn-block btn-danger" role="button">Checkout</a>
+                            <a href="/cart" class="btn btn-block btn-default" role="button">Checkout</a>
                         </div>
                     </li>
                     
@@ -57,12 +57,15 @@
         <img src="{{c.url photos.[0] width=100 height=100 crop="fill"}}">
         <div class = "info-container">
         <p class="list-group-item-text">{{ name }}</p>
-        <p class="list-group-item-text">$ {{ price }}</p>
-        <p class="list-group-item-text"> SIZE OF ITEM GOES HERE</p>
+        <p class="list-group-item-text">${{ price }}</p>
+        <p class="list-group-item-text"> {{ selectedSize }} </p>
+        <p class="list-group-item-text"> Quantity: {{ selectedQuantity }} </p>
         </div>
+        <!--
         <div class = "remove-container">
         <a href="#" class="btn btn-danger btn-sm remove" role="button" position="relative" id={{_id}}>Remove</a>
         </div>
+        -->
     </a>
 </template>
 

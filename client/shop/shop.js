@@ -76,9 +76,38 @@ Template.shopContent.helpers({
 
 
 Template.shopContent.events({
-	"click .add": function(event) {
-    	var cart = Session.get('cart')
-    	cart.push(this._id)
+	"click .addMedium": function(event) {
+		var addedProductId = this._id;
+    	var cart = Session.get('cart');
+    	var itemFound = false;
+    	var size = "Medium"; // hardcoded for now...
+    	cart.forEach(function(cartItem) {
+    		if (cartItem.productId == addedProductId && cartItem.size == size) {
+    			itemFound = true;
+    			cartItem.quantity += 1;
+    		}
+    	})
+    	if (!itemFound) {
+    		cart.push({productId: addedProductId, size: size, quantity: 1 } )
+    	}
+    	console.log(cart)
+    	Session.setPersistent('cart', cart)
+    },
+    "click .addLarge": function(event) {
+		var addedProductId = this._id;
+    	var cart = Session.get('cart');
+    	var itemFound = false;
+    	var size = "Large"; // hardcoded for now...
+    	cart.forEach(function(cartItem) {
+    		if (cartItem.productId == addedProductId && cartItem.size == size) {
+    			itemFound = true;
+    			cartItem.quantity += 1;
+    		}
+    	})
+    	if (!itemFound) {
+    		cart.push({productId: addedProductId, size: size, quantity: 1 } )
+    	}
+    	console.log(cart)
     	Session.setPersistent('cart', cart)
     }
 })	
