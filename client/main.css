@@ -18,27 +18,15 @@
   
 }
 
-@font-face {
-  text-align: center;
-  font-size: 12px;
-  color: black;
-  font-family: 'Prata', serif;
-  letter-spacing: 2px;
-  opacity: 0.8;
-}
-@font-face {
-  font-size: 14px;
-  font-family: "Lora", serif;
-  src: url('https://fonts.googleapis.com/css?family=Lora:400italic');
-  text-align: center;
-  letter-spacing: 1px;
-  opacity: 0.8;
-}
-/*
+
+
 html * {
-    font-family: 'couture' !important;
+    font-family: 'Prata' !important;
+    font-size: 11px;
+    color: black;
+    letter-spacing: 1.5px;
 }
-*/
+
 .navbar {
     border: none !important;
     border-radius: 0 !important;
