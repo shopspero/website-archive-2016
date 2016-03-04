@@ -81,6 +81,8 @@ Template.shopContent.events({
     	var cart = Session.get('cart');
     	var itemFound = false;
     	var size = "Medium"; // hardcoded for now...
+
+    	// should we change this? don't allow adding if already in cart. change quantity through cart module
     	cart.forEach(function(cartItem) {
     		if (cartItem.productId == addedProductId && cartItem.size == size) {
     			itemFound = true;

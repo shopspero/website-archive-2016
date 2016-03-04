@@ -44,11 +44,13 @@ Template.topNav.helpers({
 	cart: function() {
 		var cart = []
 		Session.get('cart').forEach(function(cartItem, index) {
-			var item = Items.findOne(cartItem.productId)
-			if (item) {
-				item.selectedSize = cartItem.size
-				item.selectedQuantity = cartItem.quantity
-				cart.push(item);
+			var selectedItem = {}
+			var product = Items.findOne(cartItem.productId)
+			if (product) {
+				selectedItem.product = product
+				selectedItem.selectedSize = cartItem.size
+				selectedItem.selectedQuantity = cartItem.quantity
+				cart.push(selectedItem);
 			}
 		})
 		return cart
@@ -57,7 +59,7 @@ Template.topNav.helpers({
   		return Session.get('cart').length
   	},
   	logo: "misc/Spero_Logo_Black",
-  	totalPrice: function() {
+  	subTotalPrice: function() {
 
   		function sum( obj ) {
 			var sum = 0;
