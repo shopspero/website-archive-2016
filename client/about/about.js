@@ -1,9 +1,30 @@
-function changeImage() {
-    var image = document.getElementById("sharon"); //what i clicked on
-    var main = document.getElementById("group"); //what i'm going to change
-    if (image.src == "https://farm6.staticflickr.com/5727/22012819988_291bab87a2_b.jpg") {
-        main.src = "http://i1036.photobucket.com/albums/a449/susiekang1995/f7615ea2-671f-4f2f-a8e4-4b8679e4c42a_zpsu37xz7kb.jpg";
-    } else {
-        main.src = "https://farm6.staticflickr.com/5727/22012819988_291bab87a2_b.jpg";
-    }
-}
+
+var info = [
+{ indivId: "yehrin", indivPhotoUrl: "https://farm1.staticflickr.com/709/22187892342_c90a6fef31_b.jpg", groupPhotoUrl: "hello",  bio: "Hello My name is yp"}
+]
+
+Template.about.helpers({
+	individuals: function() {
+		return info
+	}
+})
+
+Template.about.events({
+
+	"click .indiv": function(event) {
+		var indivId = event.target.id;
+	
+	    var image = document.getElementById(indivId); //what i clicked on
+	    var main = document.getElementById("group"); //what i'm going to change
+
+	    var newGroupUrl = "";
+	    info.forEach(function(individual, index) {
+	    	if (individual.indivId == indivId) {
+	    		newGroupUrl = info[index].groupPhotoUrl;
+	    	}
+	    })
+	    
+	    main.src = newGroupUrl;
+	}
+});
+
