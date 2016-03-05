@@ -188,10 +188,15 @@
     <img id = "group" onclick = "changeImage()" src="http://i1036.photobucket.com/albums/a449/susiekang1995/f1b47475-ad12-4e93-9296-ffcfc5eaa509_zpsjmsrskwd.jpg">
   </div>
 
-  <ul class="five_col">
-    <li><img src="https://farm1.staticflickr.com/709/22187892342_c90a6fef31_b.jpg"/></li>
-    <li><img src="https://farm6.staticflickr.com/5672/22210908431_38dae8057b_b.jpg"/></li>
-    <li><img id = "sharon" onclick = "changeImage()" src="https://farm6.staticflickr.com/5727/22012819988_291bab87a2_b.jpg"/></li>
+  <ul class="five_col indiv">
+
+    {{ #each individuals }}
+      {{ >  individualInfo }}
+    {{ /each }}
+    <!--
+    <li><img src="https://farm1.staticflickr.com/709/22187892342_c90a6fef31_b.jpg" id="yehrin"/></li>
+    <li><img src="https://farm6.staticflickr.com/5672/22210908431_38dae8057b_b.jpg" id="jen"/></li>
+    <li><img id = "sharon" src="https://farm6.staticflickr.com/5727/22012819988_291bab87a2_b.jpg"/></li>
     <li><img src="https://farm1.staticflickr.com/699/21577840394_bc676d263e_b.jpg"/></li>
     <li><img src="https://farm1.staticflickr.com/709/22187892342_c90a6fef31_b.jpg"/></li>
     <li><img src="https://farm6.staticflickr.com/5672/22210908431_38dae8057b_b.jpg"/></li>
@@ -203,6 +208,7 @@
     <li><img src="https://farm1.staticflickr.com/709/22187892342_c90a6fef31_b.jpg"/></li>
     <li id = "contact"><img src="https://farm6.staticflickr.com/5672/22210908431_38dae8057b_b.jpg"/></li>
     <li><img src="https://farm6.staticflickr.com/5727/22012819988_291bab87a2_b.jpg"/></li>
+  -->
   </ul>
 
   <br>
@@ -225,4 +231,9 @@
   </div>
 
 	
+</template>
+
+
+<template name="individualInfo">
+  <li><img src={{indivPhotoUrl}} id={{indivId}}></li>
 </template>
