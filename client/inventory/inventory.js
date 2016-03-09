@@ -127,6 +127,8 @@ Template.addInventory.events({
 		// additional options
 		newInventory.sale = event.target.sale.checked
 		newInventory.preorder = event.target.preorder.checked
+		newInventory.active = event.target.active.checked
+		newInventory.comingSoon = event.target.comingSoon.checked
 
 		newInventory.subcategories = {}
 		InventoryCategories.findOne({name: "Clothes"}).options[0].subcategories.forEach(function(subcategory, index){
