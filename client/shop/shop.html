@@ -41,6 +41,12 @@
 
                 <p class="text-center"><h4>{{name}}</h4></p>
                 <p class="text-center"><h5>$ {{ price }}</h5></p>
+                {{ #if active }}
+                	<p class="footnote"><h6> Active </h6></p>
+                {{ /if }}
+                {{ #if comingSoon }}
+                	<p class="footnote"><h6> Coming Soon </h6></p>
+                {{ /if }}
 
                 <button type="button" class="btn btn-default" aria-label="Search" >
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
