@@ -35,27 +35,33 @@
 
 <template name="item">
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-        <a href="#" class="thumbnail">
+        <a href="" class="thumbnail"> <!-- href= /product/{{_id}} -->
             <img src="{{c.url photos.[0] width=200 height=200 crop="fill"}}">
             <div class="caption"> 
 
                 <p class="text-center"><h4>{{name}}</h4></p>
                 <p class="text-center"><h5>$ {{ price }}</h5></p>
+                {{ #if active }}
+                	<p class="footnote"><h6> Active </h6></p>
+                {{ /if }}
+                {{ #if comingSoon }}
+                	<p class="footnote"><h6> Coming Soon </h6></p>
+                {{ /if }}
 
-                <button type="button" class="btn btn-default" aria-label="Left Align" >
+                <button type="button" class="btn btn-default" aria-label="Search" >
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-default addMedium" aria-label="Left Align">
+                <button type="button" class="btn btn-default addMedium" aria-label="Add Medium">
                     M
                 </button>
-                <button type="button" class="btn btn-default addLarge" aria-label="Left Align">
+                <button type="button" class="btn btn-default addLarge" aria-label="Add Large">
                     L
                 </button>
-                <button type="button" class="btn btn-default" aria-label="Left Align">
+                <button type="button" class="btn btn-default" aria-label="Share">
                     <span class="
 glyphicon glyphicon-share" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-default" aria-label="Left Align">
+                <button type="button" class="btn btn-default" aria-label="Question">
                     <span class="
 glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                 </button>
