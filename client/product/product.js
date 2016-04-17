@@ -18,3 +18,24 @@ Template.product.events({
         $('img[name=mainImage]').attr('src', newSrc);
     }
 })
+
+Template.product.events({
+    "submit .add-cart": function(event, template) {
+    	event.preventDefault();
+    	console.log(event.target)
+		// Get name
+		newSize = event.target.newSize.value;
+		newQuantity = event.target.newQuantity.value;
+		if (newQuantity != 0) {
+			addToCart(this._id, newSize, newQuantity);
+		}
+
+		// reset stuff
+		//TODO: reset default size to non-selected ..?
+
+		//template.find("#quantity-select").value = 1;
+		event.target.newQuantity.value = 1;
+
+
+    }
+})	

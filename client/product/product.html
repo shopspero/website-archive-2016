@@ -22,12 +22,15 @@
 
         <form class="add-cart">
             <label for="sizes">In Stock </label>
-            <p class="help-block"> From left to right: XS, S, M, L, XL. Leave blank if 0.</p>
-                <div class="form-group row">
-                    {{ #each sizes }}
-                        {{ > stockInput }}
-                    {{ /each }}
-                </div>
+            <select class="form-control" id="size-select" name="newSize">         
+                    <option value="Medium">M</option>
+                    <option value="Large">L</option>
+            </select>
+            <select class="form-control" id="quantity-select" name="newQuantity">          
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+            </select>
 
             <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-shopping-cart"></span>  Add to Cart</button>
         </form>

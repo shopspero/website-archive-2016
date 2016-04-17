@@ -76,41 +76,10 @@ Template.shopContent.helpers({
 
 
 Template.shopContent.events({
-	"click .addMedium": function(event) {
-		var addedProductId = this._id;
-    	var cart = Session.get('cart');
-    	var itemFound = false;
-    	var size = "Medium"; // hardcoded for now...
-
-    	// should we change this? don't allow adding if already in cart. change quantity through cart module
-    	cart.forEach(function(cartItem) {
-    		if (cartItem.productId == addedProductId && cartItem.size == size) {
-    			itemFound = true;
-    			cartItem.quantity += 1;
-    		}
-    	})
-    	if (!itemFound) {
-    		cart.push({productId: addedProductId, size: size, quantity: 1 } )
-    	}
-    	console.log(cart)
-    	Session.setPersistent('cart', cart)
-    },
-    "click .addLarge": function(event) {
-		var addedProductId = this._id;
-    	var cart = Session.get('cart');
-    	var itemFound = false;
-    	var size = "Large"; // hardcoded for now...
-    	cart.forEach(function(cartItem) {
-    		if (cartItem.productId == addedProductId && cartItem.size == size) {
-    			itemFound = true;
-    			cartItem.quantity += 1;
-    		}
-    	})
-    	if (!itemFound) {
-    		cart.push({productId: addedProductId, size: size, quantity: 1 } )
-    	}
-    	console.log(cart)
-    	Session.setPersistent('cart', cart)
+	"click .addToCart": function(event) {
+		var size = event.target.value
+		console.log($("#quantity-select").value);
+		addToCart(this._id, size)
     }
 })	
 
