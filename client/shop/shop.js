@@ -75,11 +75,3 @@ Template.shopContent.helpers({
 })
 
 
-Template.shopContent.events({
-	"click .addToCart": function(event) {
-		var size = event.target.value
-		console.log($("#quantity-select").value);
-		addToCart(this._id, size)
-    }
-})	
-
