@@ -1,5 +1,5 @@
 <template name="cartContent">
-	<h1> Cart </h1>
+	<h2> Cart </h2>
 	<hr/>
 	{{#if Template.subscriptionsReady }}
 		{{#if cartItems}}
@@ -10,11 +10,12 @@
 			<h4> Cart is Empty </h4>
 		{{ /if}}
 		<hr>
-		<h1> Total: ${{totalPrice}} </h1>
+		<h2> Total: ${{totalPrice}} </h2>
 
 	{{/if}}
 
-
+	<!-- need to setup paypal account or something else to host checkout page/button (API credentials)-->
+	<!-- <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;"> -->
 	<hr/>
 </template>
 

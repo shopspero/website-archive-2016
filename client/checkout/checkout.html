@@ -1,0 +1,24 @@
+<template name="checkoutContent">
+	<h2> Order Details </h2>
+	{{#if Template.subscriptionsReady }}
+		{{#if orderItems}}
+			{{ #each orderItems }}
+				{{ > orderItem }}
+			{{ /each }}
+		{{ else }}
+			<h3> Somehow got an empty order </h3>
+		{{ /if}}
+		<hr>
+		<h3> Shipping Cost: $5 </h3>
+		<h3> Tax: <!-- Use paypal api here --> </h3>
+		<h3> Total Cost: ${{totalPrice}} </h3>
+	{{/if}}
+</template>
+
+
+<template name="orderItem">
+	<div class="row">
+		{{ name }}, ${{ price}}
+	</div>
+
+</template>

@@ -21,10 +21,9 @@
 
                     <li id="login-dropdown-list" class="dropdown">
                         {{ checkCart }}
-                        <a class="dropdown-toggle" data-toggle="dropdown">
+                        <a href = "/cart" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-shopping-cart"></i> Cart ({{ cartCount }})
                         </a>
-
                         <div class="dropdown-menu">
                             <div class="list-group">
                                 {{#if cart}}
