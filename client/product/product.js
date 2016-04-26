@@ -6,16 +6,34 @@
 //         'mainImg': initImg
 //     })
 // })
+
+Template.product.onCreated(function() {
+
+    Session.setPersistent('mainImage', "") //add check if photo even exists TODO
+})
+
 Template.product.helpers({
     sizes: function() {
+
+
+        console.log(this.sizes) // { "S": 1, "XS": 2}
         return ['XS', 'S', 'M', 'L', 'XL']
+    },
+    mainImage: function() {
+        if (Session.get('mainImage') == "") {
+            Session.setPersistent('mainImage', this.photos[0]); //add check TODO
+        } 
+        return Session.get('mainImage')
     }
 })
 Template.product.events({
     "click .alt-img": function(event) {
-        var newSrc = c.url(this);
-        window.alert(5 + 6);
-        $('img[name=mainImage]').attr('src', newSrc);
+        console.log("old")
+        console.log(Session.get('mainImage'))
+        console.log('new')
+        console.log(this.toString())
+
+        Session.setPersistent('mainImage', this.toString())
     }
 })
 
