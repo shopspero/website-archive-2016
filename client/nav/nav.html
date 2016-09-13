@@ -1,5 +1,5 @@
 <template name="topNav">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-top" role="navigation">
         <div class="container">
 
             <div class="navbar-header">
@@ -9,38 +9,37 @@
                     <span class="icon-bar"></span>  
                     <!-- <span class="sr-only">Toggle navigation</span> -->
                 </button>
-                <a class="navbar-brand" href="/"> <img alt="brand" src="{{c.url logo width=25 height=25 crop="fill"}}" id="brand-logo"></a>
+                <a class="navbar-brand" href="/"> <!-- <img alt="brand" src="{{c.url logo width=25 height=25 crop="fill"}}" class="navbar-brand-logo">--> SHOP SPERO</a>
             </div>
         	<div class="navbar-collapse collapse navbar-right" id="topNav">
                 <ul class="nav navbar-nav">
-                	<li><a href="/about">About Spero</a></li>
-                    <!--
-                	<li><a href="/about#vision">The Vision</a></li>
-                	<li><a href="/about#team">The Team</a></li>
-                    -->
                     {{#if isInRole 'admin' 'default-group'}}
                         <li><a href="/inventory">Add/Edit Inventory</a></li>
                     {{/if}}
-                    <li id="login-dropdown-list" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            Cart ({{ cart.count }})
-                        </a>
 
+                    {{> loginButtons}}
+
+                    <li id="login-dropdown-list" class="dropdown">
+                        {{ checkCart }}
+                        <a href = "/cart" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-shopping-cart"></i> Cart ({{ cartCount }})
+                        </a>
                         <div class="dropdown-menu">
                             <div class="list-group">
-
-                                {{ #each cart }}
-                                    <a href="#" class="list-group-item">
-                                        <h4 class="list-group-item-heading">{{ name }}</h4>
-                                        <p class="list-group-item-text">$ {{ price }}</p>
-                                    </a>
-                                {{ /each }}
+                                {{#if cart}}
+                                    {{ #each cart }}
+                                        {{ >  navCartItem }}
+                                    {{ /each }}
+                                {{ else }}
+                                    <h4> Cart is Empty.</h4>    
+                                {{ /if}}
+                                
                             </div>
-                            <h3>Total: $250 </h3>
-                            <button type="button" class="btn btn-block btn-danger">Checkout</button>
+                            <h3>Subtotal: ${{subTotalPrice}} </h3>
+                            <a href="/cart" class="btn btn-block btn-default" role="button">Checkout</a>
                         </div>
                     </li>
-                    {{> loginButtons}}
+                    
                     <!--
                     <li><a href="#" class="btn btn- btn-lg order-left" role="button" id={{this}}><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                     -->
@@ -49,13 +48,26 @@
             </div>
         </div>
     </nav>
+</template>
 
-
-
+<template name="navCartItem">
+    <!-- link to item in a href="#"ez-->
+    <a href="#" class="list-group-item">
+        <img src="{{c.url product.photos.[0] width=100 height=100 crop="fill"}}">
+        <div class = "info-container">
+        <p class="list-group-item-text">{{ product.name }}</p>
+        <p class="list-group-item-text">${{ product.price }}</p>
+        <p class="list-group-item-text"> {{ selectedSize }} </p>
+        <p class="list-group-item-text"> Qty: {{ selectedQuantity }} </p>
+        </div>
+        <div class = "remove-container">
+            <a href="#"><span class="glyphicon glyphicon-remove remove">x</span></a>
+        </div>
+    </a>
 </template>
 
 <template name="mainNav">
-     <nav class="navbar navbar-inverse navbar-lower" role="navigation">
+     <nav class="navbar navbar-default navbar-lower" role="navigation">
         <div class="container">
         	
             <div class="navbar-header">
@@ -101,7 +113,7 @@
 <template name="category">
     <li class="dropdown">
         {{ #if subcategories.length }}
-            <a href={{categoryUrl}} id="dropthedown" data-toggle="dropdown" class="dropdown-toggle disabled">{{name}} <b class="caret"></b></a>
+            <a href={{categoryUrl}} id="dropthedown" data-toggle="dropdown" class="dropdown-toggle disabled">{{name}} <!--<b class="caret"></b> --></a>
             <ul class="dropdown-menu" id="menu1">
 
                 {{ #each subcategories }}

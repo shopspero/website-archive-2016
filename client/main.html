@@ -10,18 +10,23 @@
 
 <template name="layout">
 	{{> topNav}}
+	<!--
 	<div class="divide-nav">
 		<div class="container">
 			<p class="divide-text">Shop Spero</p>
 		</div>
 	</div>
-	<!--
-	<div class="shop-spero-text">
-		<h1><a class="home-button" href="/">Shop Spero</a></h1>
-	</div>  
 	-->
 	{{> mainNav}}
 </template>
 
 
+<template name="homeLayout">
+	
+	{{> topNav}}
+	{{> mainNav}}
+</template>
 
+<template name="landingPage">
+	<a href="/home">Shop now!</a>
+</template>

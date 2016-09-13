@@ -1,0 +1,14 @@
+div.background-img {
+    background-image: url("http://i1036.photobucket.com/albums/a449/susiekang1995/dacfe3da-94ae-4099-b3cf-f4d2404102ac_zpsxkocr4cs.jpg");
+    margin: 0;
+    margin-top: 80px;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    z-index: -1;
+}

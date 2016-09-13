@@ -1,15 +1,44 @@
 /* CSS declarations go here */
 
+/* font declaration for couture font*/
+@font-face {
+  font-family: 'couture';
+  src: url('/fonts/couture-bld.otf');
+  font-weight: normal;
+  font-style: normal;
+  font-size:12px;
+
+}
+/* font declaration for chunkfont*/
+@font-face {
+  font-family: 'chunk';
+  src: url('/fonts/Chunkfive.otf');
+  font-weight: normal;
+  font-style: normal;
+  
+}
+
+
+
+/*
+html * {
+    font-family: 'Prata' !important;
+    font-size: 11px;
+    color: black;
+    letter-spacing: 1.5px;
+}
+*/
 
 .navbar {
-	border: none !important;
-  border-radius: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
 
 }
 .navbar .navbar-nav {
   display: inline-block;
   float: none;
   vertical-align: top;
+
 }
 
 .navbar .navbar-collapse {
@@ -20,8 +49,14 @@
 	margin-top: 60px;
 	text-align: center;
 }
+
 a.home-button {
 	text-decoration: none; 
 	color: black;
+}
+
+img#home_cover {
+	max-width: 100% !important;
+	height: auto !important;
 }
 

@@ -1,0 +1,49 @@
+
+<template name="product">
+    <div class = "container">
+        <div class = "page-header">
+           	<p class="text-center"><h3>{{ name }}</h3></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+
+                <img name="mainImage" src="{{c.url mainImage}}">
+                <div class="row">
+                    
+                    {{ #each photos }}
+                        {{ > prodPhoto}}
+                    {{ /each }}
+                    
+                </div>
+            </div>
+            <div class="col-sm-8">
+                {{ description }}
+            </div>
+        </div>
+
+        <form class="add-cart">
+            <label for="sizes">In Stock </label>
+            <select class="form-control" id="size-select" name="newSize">         
+                    <option value="Medium">M</option>
+                    <option value="Large">L</option>
+            </select>
+            <select class="form-control" id="quantity-select" name="newQuantity">          
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+            </select>
+
+            <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-shopping-cart"></span>  Add to Cart</button>
+        </form>
+
+    </div>
+</template>
+
+<template name="prodPhoto">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <br>
+        <div class="thumbnail">
+            <img src="{{c.url this}}" class="btn btn-default btn-sm alt-img">
+        </div>
+    </div>
+</template>

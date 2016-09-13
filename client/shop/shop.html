@@ -1,5 +1,5 @@
 <template name="shopContent">
-  <h2> <strong>{{ name }} </strong><span style="font-size:.7em;">{{ subcategoryName }}</span> </h2>
+  <h3> <strong>{{ name }} </strong><span style="font-size:.7em;">{{ subcategoryName }}</span> </h3>
   <br>
   {{#if Template.subscriptionsReady }}
     <div class="row">
@@ -11,16 +11,16 @@
         </div>
     </div>
     <br>
+    <!--
     Sort by: <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-default">Price</button>
         <button type="button" class="btn btn-default">Recently Added</button>
         <button type="button" class="btn btn-default">Most Popular</button>
     </div>
+    -->
     <br>
     <br>
     <div class="row">
-    
-
         {{#each items}}
           {{> item}}
         {{/each}}
@@ -31,48 +31,29 @@
   {{/if}}
 </template>
 
-<template name="women">
-  	<p> These are women {{ subcategory }} lolol.. </p>
-   	{{#each items}}
-  		{{> item}}
-	{{/each}}
-</template>
 
-<template name="men">
-  	<p> These are men lolol.. </p>
-   	{{#each items}}
-  		{{> item}}
-	{{/each}}
-</template>
-
-<template name="accessories">
-  	<p> These are accessories lolol.. </p>
-   	{{#each items}}
-  		{{> item}}
-	{{/each}}
-</template>
-
-<template name="artwork">
-  <p> These are artwork </p>
-</template>
-
-<template name="all">
-  <p> These are all </p>
-</template>
 
 <template name="item">
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-        <a href="#" class="thumbnail">
+        <a href="/product/{{_id}}" class="thumbnail"> <!-- href= /product/{{_id}} -->
             <img src="{{c.url photos.[0] width=200 height=200 crop="fill"}}">
             <div class="caption"> 
-                <p> {{ name }} </p>
-                <p> ${{ price }} </p>
+
+                <p class="text-center"><h4>{{name}}</h4></p>
+                <p class="text-center"><h5>$ {{ price }}</h5></p>
+                {{ #if active }}
+                	<p class="footnote"><h6> Active </h6></p>
+                {{ /if }}
+                {{ #if comingSoon }}
+                	<p class="footnote"><h6> Coming Soon </h6></p>
+                {{ /if }}
+
+                <button type="button" class="btn btn-default" aria-label="Search" >
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
             </div>
+
         </a>
     </div>
 
-</template>
-
-<template name="sale">
-  <p> These are artwork </p>
 </template>
